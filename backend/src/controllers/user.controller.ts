@@ -33,10 +33,10 @@ export const getUser = async (req: Request, res: Response) => {
       return res.status(404).json({ error: 'User not found' });
     }
 
-    res.json({ user });
+    return res.json({ user });
   } catch (error) {
     console.error('Get user error:', error);
-    res.status(500).json({ error: 'Failed to fetch user' });
+    return res.status(500).json({ error: 'Failed to fetch user' });
   }
 };
 
@@ -69,10 +69,10 @@ export const updateProfile = async (req: AuthRequest, res: Response) => {
       }
     });
 
-    res.json({ user });
+    return res.json({ user });
   } catch (error) {
     console.error('Update profile error:', error);
-    res.status(500).json({ error: 'Failed to update profile' });
+    return res.status(500).json({ error: 'Failed to update profile' });
   }
 };
 
@@ -121,10 +121,10 @@ export const followUser = async (req: AuthRequest, res: Response) => {
       }
     });
 
-    res.json({ message: 'User followed successfully' });
+    return res.json({ message: 'User followed successfully' });
   } catch (error) {
     console.error('Follow user error:', error);
-    res.status(500).json({ error: 'Failed to follow user' });
+    return res.status(500).json({ error: 'Failed to follow user' });
   }
 };
 
@@ -151,10 +151,10 @@ export const unfollowUser = async (req: AuthRequest, res: Response) => {
       where: { id: follow.id }
     });
 
-    res.json({ message: 'User unfollowed successfully' });
+    return res.json({ message: 'User unfollowed successfully' });
   } catch (error) {
     console.error('Unfollow user error:', error);
-    res.status(500).json({ error: 'Failed to unfollow user' });
+    return res.status(500).json({ error: 'Failed to unfollow user' });
   }
 };
 
@@ -178,10 +178,10 @@ export const getFollowers = async (req: Request, res: Response) => {
       }
     });
 
-    res.json({ followers: followers.map(f => f.follower) });
+    return res.json({ followers: followers.map(f => f.follower) });
   } catch (error) {
     console.error('Get followers error:', error);
-    res.status(500).json({ error: 'Failed to fetch followers' });
+    return res.status(500).json({ error: 'Failed to fetch followers' });
   }
 };
 
@@ -205,9 +205,9 @@ export const getFollowing = async (req: Request, res: Response) => {
       }
     });
 
-    res.json({ following: following.map(f => f.following) });
+    return res.json({ following: following.map(f => f.following) });
   } catch (error) {
     console.error('Get following error:', error);
-    res.status(500).json({ error: 'Failed to fetch following' });
+    return res.status(500).json({ error: 'Failed to fetch following' });
   }
 };

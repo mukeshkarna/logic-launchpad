@@ -20,7 +20,7 @@ usage() {
     echo -e "  ${GREEN}dev${NC}   - Run in development mode"
     echo -e "  ${GREEN}prod${NC}  - Run in production mode"
     echo ""
-    echo -e "${BLUE}Common Commands:${NC}"
+    echo -e "${BLUE}Docker Commands:${NC}"
     echo -e "  ${GREEN}up${NC}       - Create and start containers"
     echo -e "  ${GREEN}down${NC}     - Stop and remove containers"
     echo -e "  ${GREEN}start${NC}    - Start existing containers"
@@ -31,6 +31,14 @@ usage() {
     echo -e "  ${GREEN}build${NC}    - Build or rebuild services"
     echo -e "  ${GREEN}pull${NC}     - Pull service images"
     echo -e "  ${GREEN}exec${NC}     - Execute command in a running container"
+    echo ""
+    echo -e "${BLUE}Database Commands:${NC}"
+    echo -e "  ${GREEN}migrate${NC}        - Run database migrations"
+    echo -e "  ${GREEN}migrate:deploy${NC} - Deploy migrations (production)"
+    echo -e "  ${GREEN}migrate:reset${NC}  - Reset database and run migrations"
+    echo -e "  ${GREEN}migrate:status${NC} - Show migration status"
+    echo -e "  ${GREEN}seed${NC}           - Seed database with sample data"
+    echo -e "  ${GREEN}studio${NC}         - Open Prisma Studio (database GUI)"
     echo ""
     echo -e "${BLUE}Common Options:${NC}"
     echo -e "  ${GREEN}-d, --detach${NC}       - Run containers in background"
@@ -62,6 +70,12 @@ usage() {
     echo ""
     echo -e "  ${YELLOW}# Rebuild specific service${NC}"
     echo -e "  ./run.sh dev build backend"
+    echo ""
+    echo -e "  ${YELLOW}# Database operations${NC}"
+    echo -e "  ./run.sh dev migrate"
+    echo -e "  ./run.sh dev seed"
+    echo -e "  ./run.sh dev studio"
+    echo -e "  ./run.sh prod migrate:deploy"
     echo ""
 }
 
@@ -151,15 +165,69 @@ main() {
     # Build the docker-compose command
     COMPOSE_CMD="docker compose -f $COMPOSE_FILE"
 
-    # Get all remaining arguments (command + options)
-    COMMAND="$@"
+    # Get the command
+    COMMAND=$1
+    shift
 
-    # Execute docker-compose command
-    echo -e "${BLUE}Executing:${NC} $COMPOSE_CMD $COMMAND"
-    echo ""
-
-    $COMPOSE_CMD $COMMAND
-    EXIT_CODE=$?
+    # Handle custom database commands
+    case "$COMMAND" in
+        migrate)
+            echo -e "${BLUE}Running database migrations...${NC}"
+            echo ""
+            if [ "$MODE" == "dev" ]; then
+                $COMPOSE_CMD exec backend npm run prisma:migrate
+            else
+                $COMPOSE_CMD exec backend npx prisma migrate deploy
+            fi
+            EXIT_CODE=$?
+            ;;
+        migrate:deploy)
+            echo -e "${BLUE}Deploying database migrations...${NC}"
+            echo ""
+            $COMPOSE_CMD exec backend npx prisma migrate deploy
+            EXIT_CODE=$?
+            ;;
+        migrate:reset)
+            echo -e "${YELLOW}Warning: This will reset your database!${NC}"
+            read -p "Are you sure? (yes/no): " confirm
+            if [ "$confirm" == "yes" ]; then
+                echo -e "${BLUE}Resetting database and running migrations...${NC}"
+                echo ""
+                $COMPOSE_CMD exec backend npx prisma migrate reset --force
+                EXIT_CODE=$?
+            else
+                echo -e "${YELLOW}Operation cancelled${NC}"
+                exit 0
+            fi
+            ;;
+        migrate:status)
+            echo -e "${BLUE}Checking migration status...${NC}"
+            echo ""
+            $COMPOSE_CMD exec backend npx prisma migrate status
+            EXIT_CODE=$?
+            ;;
+        seed)
+            echo -e "${BLUE}Seeding database...${NC}"
+            echo ""
+            $COMPOSE_CMD exec backend npm run prisma:seed
+            EXIT_CODE=$?
+            ;;
+        studio)
+            echo -e "${BLUE}Opening Prisma Studio...${NC}"
+            echo -e "${YELLOW}Access at: http://localhost:5555${NC}"
+            echo ""
+            $COMPOSE_CMD exec backend npm run prisma:studio
+            EXIT_CODE=$?
+            ;;
+        *)
+            # Execute standard docker-compose command
+            FULL_COMMAND="$COMMAND $@"
+            echo -e "${BLUE}Executing:${NC} $COMPOSE_CMD $FULL_COMMAND"
+            echo ""
+            $COMPOSE_CMD $FULL_COMMAND
+            EXIT_CODE=$?
+            ;;
+    esac
 
     if [ $EXIT_CODE -eq 0 ]; then
         echo ""

@@ -234,13 +234,34 @@ export const getBlog = async (req: AuthRequest, res: Response) => {
       return res.status(404).json({ error: 'Blog not found' });
     }
 
-    // Track view
-    await prisma.view.create({
-      data: {
-        blogId: blog.id,
-        userId: req.user?.id,
+    // Track view (but not for super admins, moderators, or the blog author)
+    if (req.user) {
+      const viewer = await prisma.user.findUnique({
+        where: { id: req.user.id },
+        select: { role: true }
+      });
+
+      const shouldTrackView =
+        viewer?.role !== 'SUPER_ADMIN' &&
+        viewer?.role !== 'MODERATOR' &&
+        blog.authorId !== req.user.id;
+
+      if (shouldTrackView) {
+        await prisma.view.create({
+          data: {
+            blogId: blog.id,
+            userId: req.user.id,
+          }
+        });
       }
-    });
+    } else {
+      // Track anonymous views
+      await prisma.view.create({
+        data: {
+          blogId: blog.id,
+        }
+      });
+    }
 
     // Check if current user has liked the blog
     let isLiked = false;

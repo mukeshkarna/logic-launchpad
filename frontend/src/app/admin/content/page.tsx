@@ -158,30 +158,30 @@ export default function AdminContentPage() {
 
   if (isLoading || loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center dark:bg-gray-900">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Loading content...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 dark:border-primary-500 mx-auto"></div>
+          <p className="mt-4 text-gray-600 dark:text-gray-400">Loading content...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       {/* Header */}
-      <div className="bg-white border-b border-gray-200">
+      <div className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-2xl font-bold text-gray-900">Content Moderation</h1>
-              <p className="text-sm text-gray-600 mt-1">
+              <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Content Moderation</h1>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
                 Manage all blogs and content across the platform
               </p>
             </div>
             <Link
               href="/admin"
-              className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50"
+              className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 dark:text-gray-300"
             >
               Back to Dashboard
             </Link>
@@ -191,12 +191,12 @@ export default function AdminContentPage() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Filters */}
-        <div className="bg-white rounded-lg border border-gray-200 p-6 mb-6">
-          <h2 className="text-lg font-semibold mb-4">Filters</h2>
+        <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6 mb-6">
+          <h2 className="text-lg font-semibold mb-4 dark:text-gray-100">Filters</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {/* Search */}
             <div className="md:col-span-2">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Search by title or content
               </label>
               <input
@@ -207,13 +207,13 @@ export default function AdminContentPage() {
                   setPagination({ ...pagination, page: 1 });
                 }}
                 placeholder="Search blogs..."
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-gray-100 dark:placeholder-gray-400"
               />
             </div>
 
             {/* Status Filter */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Status
               </label>
               <select
@@ -222,7 +222,7 @@ export default function AdminContentPage() {
                   setStatusFilter(e.target.value);
                   setPagination({ ...pagination, page: 1 });
                 }}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-gray-100"
               >
                 <option value="">All Status</option>
                 <option value="DRAFT">Draft</option>
@@ -241,9 +241,9 @@ export default function AdminContentPage() {
                   setReportedOnly(e.target.checked);
                   setPagination({ ...pagination, page: 1 });
                 }}
-                className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
+                className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 dark:border-gray-600 rounded"
               />
-              <label htmlFor="reportedOnly" className="ml-2 block text-sm text-gray-700">
+              <label htmlFor="reportedOnly" className="ml-2 block text-sm text-gray-700 dark:text-gray-300">
                 Show only reported content
               </label>
             </div>
@@ -258,9 +258,9 @@ export default function AdminContentPage() {
                   setFeaturedOnly(e.target.checked);
                   setPagination({ ...pagination, page: 1 });
                 }}
-                className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
+                className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 dark:border-gray-600 rounded"
               />
-              <label htmlFor="featuredOnly" className="ml-2 block text-sm text-gray-700">
+              <label htmlFor="featuredOnly" className="ml-2 block text-sm text-gray-700 dark:text-gray-300">
                 Show only featured content
               </label>
             </div>
@@ -269,33 +269,33 @@ export default function AdminContentPage() {
 
         {/* Bulk Actions */}
         {selectedBlogs.length > 0 && (
-          <div className="bg-primary-50 border border-primary-200 rounded-lg p-4 mb-6">
+          <div className="bg-primary-50 dark:bg-primary-900/20 border border-primary-200 dark:border-primary-700 rounded-lg p-4 mb-6">
             <div className="flex items-center justify-between">
-              <span className="text-sm font-medium text-primary-900">
+              <span className="text-sm font-medium text-primary-900 dark:text-primary-300">
                 {selectedBlogs.length} blog(s) selected
               </span>
               <div className="flex gap-2">
                 <button
                   onClick={() => handleBulkFeature(true)}
-                  className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm"
+                  className="px-4 py-2 bg-blue-600 dark:bg-blue-600 text-white rounded hover:bg-blue-700 dark:hover:bg-blue-700 text-sm"
                 >
                   Feature Selected
                 </button>
                 <button
                   onClick={() => handleBulkFeature(false)}
-                  className="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700 text-sm"
+                  className="px-4 py-2 bg-gray-600 dark:bg-gray-600 text-white rounded hover:bg-gray-700 dark:hover:bg-gray-700 text-sm"
                 >
                   Unfeature Selected
                 </button>
                 <button
                   onClick={handleBulkUnpublish}
-                  className="px-4 py-2 bg-yellow-600 text-white rounded hover:bg-yellow-700 text-sm"
+                  className="px-4 py-2 bg-yellow-600 dark:bg-yellow-600 text-white rounded hover:bg-yellow-700 dark:hover:bg-yellow-700 text-sm"
                 >
                   Unpublish Selected
                 </button>
                 <button
                   onClick={handleBulkDelete}
-                  className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 text-sm"
+                  className="px-4 py-2 bg-red-600 dark:bg-red-600 text-white rounded hover:bg-red-700 dark:hover:bg-red-700 text-sm"
                 >
                   Delete Selected
                 </button>
@@ -305,39 +305,39 @@ export default function AdminContentPage() {
         )}
 
         {/* Blogs List */}
-        <div className="bg-white rounded-lg border border-gray-200">
+        <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
           {blogs.length === 0 ? (
             <div className="text-center py-12">
-              <p className="text-gray-500">No blogs found</p>
+              <p className="text-gray-500 dark:text-gray-400">No blogs found</p>
             </div>
           ) : (
             <>
               {/* Table Header */}
-              <div className="border-b border-gray-200 bg-gray-50 px-6 py-3">
+              <div className="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-700 px-6 py-3">
                 <div className="flex items-center gap-4">
                   <input
                     type="checkbox"
                     checked={selectedBlogs.length === blogs.length}
                     onChange={toggleSelectAll}
-                    className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
+                    className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 dark:border-gray-600 rounded"
                   />
-                  <span className="text-sm font-medium text-gray-700">
+                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
                     Select All
                   </span>
                 </div>
               </div>
 
               {/* Blogs */}
-              <div className="divide-y divide-gray-200">
+              <div className="divide-y divide-gray-200 dark:divide-gray-700">
                 {blogs.map((blog) => (
-                  <div key={blog.id} className="p-6 hover:bg-gray-50">
+                  <div key={blog.id} className="p-6 hover:bg-gray-50 dark:hover:bg-gray-700/50">
                     <div className="flex items-start gap-4">
                       {/* Checkbox */}
                       <input
                         type="checkbox"
                         checked={selectedBlogs.includes(blog.id)}
                         onChange={() => toggleSelectBlog(blog.id)}
-                        className="h-4 w-4 mt-1 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
+                        className="h-4 w-4 mt-1 text-primary-600 focus:ring-primary-500 border-gray-300 dark:border-gray-600 rounded"
                       />
 
                       {/* Blog Info */}
@@ -346,11 +346,11 @@ export default function AdminContentPage() {
                           <div>
                             <Link
                               href={`/blog/${blog.slug}`}
-                              className="text-lg font-semibold text-gray-900 hover:text-primary-600"
+                              className="text-lg font-semibold text-gray-900 dark:text-gray-100 hover:text-primary-600 dark:hover:text-primary-400"
                             >
                               {blog.title}
                             </Link>
-                            <div className="flex items-center gap-3 mt-2 text-sm text-gray-600">
+                            <div className="flex items-center gap-3 mt-2 text-sm text-gray-600 dark:text-gray-400">
                               <span>By {blog.author.fullName}</span>
                               <span>•</span>
                               <span>{new Date(blog.createdAt).toLocaleDateString()}</span>
@@ -360,7 +360,7 @@ export default function AdminContentPage() {
                               <span>{blog._count.comments} comments</span>
                             </div>
                             {blog.excerpt && (
-                              <p className="text-sm text-gray-600 mt-2 line-clamp-2">
+                              <p className="text-sm text-gray-600 dark:text-gray-400 mt-2 line-clamp-2">
                                 {blog.excerpt}
                               </p>
                             )}
@@ -371,21 +371,21 @@ export default function AdminContentPage() {
                             <span
                               className={`px-2 py-1 rounded text-xs font-medium ${
                                 blog.status === 'PUBLISHED'
-                                  ? 'bg-green-100 text-green-700'
+                                  ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400'
                                   : blog.status === 'DRAFT'
-                                  ? 'bg-yellow-100 text-yellow-700'
-                                  : 'bg-gray-100 text-gray-700'
+                                  ? 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400'
+                                  : 'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300'
                               }`}
                             >
                               {blog.status}
                             </span>
                             {blog.isFeatured && (
-                              <span className="px-2 py-1 rounded text-xs font-medium bg-blue-100 text-blue-700">
+                              <span className="px-2 py-1 rounded text-xs font-medium bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400">
                                 Featured
                               </span>
                             )}
                             {blog.isReported && (
-                              <span className="px-2 py-1 rounded text-xs font-medium bg-red-100 text-red-700">
+                              <span className="px-2 py-1 rounded text-xs font-medium bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400">
                                 Reported
                               </span>
                             )}
@@ -396,19 +396,19 @@ export default function AdminContentPage() {
                         <div className="flex gap-2 mt-4">
                           <Link
                             href={`/blog/${blog.slug}`}
-                            className="px-3 py-1 text-sm border border-gray-300 rounded hover:bg-gray-50"
+                            className="px-3 py-1 text-sm border border-gray-300 dark:border-gray-600 rounded hover:bg-gray-50 dark:hover:bg-gray-700 dark:text-gray-300"
                           >
                             View
                           </Link>
                           <button
                             onClick={() => handleToggleFeature(blog.id)}
-                            className="px-3 py-1 text-sm border border-gray-300 rounded hover:bg-gray-50"
+                            className="px-3 py-1 text-sm border border-gray-300 dark:border-gray-600 rounded hover:bg-gray-50 dark:hover:bg-gray-700 dark:text-gray-300"
                           >
                             {blog.isFeatured ? 'Unfeature' : 'Feature'}
                           </button>
                           <button
                             onClick={() => handleDelete(blog.id)}
-                            className="px-3 py-1 text-sm text-red-600 border border-red-300 rounded hover:bg-red-50"
+                            className="px-3 py-1 text-sm text-red-600 dark:text-red-400 border border-red-300 dark:border-red-600 rounded hover:bg-red-50 dark:hover:bg-red-900/20"
                           >
                             Delete
                           </button>
@@ -421,23 +421,23 @@ export default function AdminContentPage() {
 
               {/* Pagination */}
               {pagination.pages > 1 && (
-                <div className="border-t border-gray-200 px-6 py-4">
+                <div className="border-t border-gray-200 dark:border-gray-700 px-6 py-4">
                   <div className="flex items-center justify-between">
-                    <div className="text-sm text-gray-600">
+                    <div className="text-sm text-gray-600 dark:text-gray-400">
                       Page {pagination.page} of {pagination.pages} (Total: {pagination.total} blogs)
                     </div>
                     <div className="flex gap-2">
                       <button
                         onClick={() => setPagination({ ...pagination, page: pagination.page - 1 })}
                         disabled={pagination.page === 1}
-                        className="px-4 py-2 border border-gray-300 rounded hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded hover:bg-gray-50 dark:hover:bg-gray-700 dark:text-gray-300 disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         Previous
                       </button>
                       <button
                         onClick={() => setPagination({ ...pagination, page: pagination.page + 1 })}
                         disabled={pagination.page === pagination.pages}
-                        className="px-4 py-2 border border-gray-300 rounded hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded hover:bg-gray-50 dark:hover:bg-gray-700 dark:text-gray-300 disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         Next
                       </button>

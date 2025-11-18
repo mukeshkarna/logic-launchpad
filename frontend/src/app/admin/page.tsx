@@ -60,30 +60,30 @@ export default function AdminDashboardPage() {
 
   if (isLoading || loading || !stats) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center dark:bg-gray-900">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Loading admin dashboard...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 dark:border-primary-500 mx-auto"></div>
+          <p className="mt-4 text-gray-600 dark:text-gray-400">Loading admin dashboard...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       {/* Admin Header */}
-      <div className="bg-white border-b border-gray-200">
+      <div className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex justify-between items-center">
             <div>
-              <h1 className="text-2xl font-bold text-gray-900">Admin Dashboard</h1>
-              <p className="text-sm text-gray-600">
+              <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Admin Dashboard</h1>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
                 Welcome back, {user?.fullName} ({user?.role})
               </p>
             </div>
             <Link
               href="/"
-              className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50"
+              className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 dark:text-gray-300"
             >
               ← Back to Site
             </Link>
@@ -93,39 +93,49 @@ export default function AdminDashboardPage() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Quick Links */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-8">
           <Link
             href="/admin/users"
-            className="p-4 bg-white rounded-lg border border-gray-200 hover:border-primary-500 hover:shadow-md transition-all"
+            className="p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-primary-500 dark:hover:border-primary-400 hover:shadow-md transition-all"
           >
             <div className="text-3xl mb-2">👥</div>
-            <div className="font-semibold">User Management</div>
-            <div className="text-sm text-gray-600">Manage users & roles</div>
+            <div className="font-semibold dark:text-gray-100">User Management</div>
+            <div className="text-sm text-gray-600 dark:text-gray-400">Manage users & roles</div>
           </Link>
           <Link
             href="/admin/content"
-            className="p-4 bg-white rounded-lg border border-gray-200 hover:border-primary-500 hover:shadow-md transition-all"
+            className="p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-primary-500 dark:hover:border-primary-400 hover:shadow-md transition-all"
           >
             <div className="text-3xl mb-2">📝</div>
-            <div className="font-semibold">Content Moderation</div>
-            <div className="text-sm text-gray-600">Review & moderate blogs</div>
+            <div className="font-semibold dark:text-gray-100">Content Moderation</div>
+            <div className="text-sm text-gray-600 dark:text-gray-400">Review & moderate blogs</div>
           </Link>
           <Link
             href="/admin/leaderboards"
-            className="p-4 bg-white rounded-lg border border-gray-200 hover:border-primary-500 hover:shadow-md transition-all"
+            className="p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-primary-500 dark:hover:border-primary-400 hover:shadow-md transition-all"
           >
             <div className="text-3xl mb-2">🏆</div>
-            <div className="font-semibold">Leaderboards</div>
-            <div className="text-sm text-gray-600">Top performers</div>
+            <div className="font-semibold dark:text-gray-100">Leaderboards</div>
+            <div className="text-sm text-gray-600 dark:text-gray-400">Top performers</div>
           </Link>
           <Link
             href="/admin/settings"
-            className="p-4 bg-white rounded-lg border border-gray-200 hover:border-primary-500 hover:shadow-md transition-all"
+            className="p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-primary-500 dark:hover:border-primary-400 hover:shadow-md transition-all"
           >
             <div className="text-3xl mb-2">⚙️</div>
-            <div className="font-semibold">Settings</div>
-            <div className="text-sm text-gray-600">Platform configuration</div>
+            <div className="font-semibold dark:text-gray-100">Settings</div>
+            <div className="text-sm text-gray-600 dark:text-gray-400">Platform configuration</div>
           </Link>
+          {user?.role === 'SUPER_ADMIN' && (
+            <Link
+              href="/admin/audit-log"
+              className="p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-primary-500 dark:hover:border-primary-400 hover:shadow-md transition-all"
+            >
+              <div className="text-3xl mb-2">📋</div>
+              <div className="font-semibold dark:text-gray-100">Audit Log</div>
+              <div className="text-sm text-gray-600 dark:text-gray-400">Track admin actions</div>
+            </Link>
+          )}
         </div>
 
         {/* Statistics Cards */}
@@ -160,34 +170,34 @@ export default function AdminDashboardPage() {
 
         {/* Activity Stats */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-          <div className="bg-white p-6 rounded-lg border border-gray-200">
-            <h3 className="text-lg font-semibold mb-4">Active Users</h3>
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
+            <h3 className="text-lg font-semibold mb-4 dark:text-gray-100">Active Users</h3>
             <div className="space-y-3">
               <div className="flex justify-between items-center">
-                <span className="text-gray-600">Last 7 days</span>
-                <span className="text-2xl font-bold text-primary-600">
+                <span className="text-gray-600 dark:text-gray-400">Last 7 days</span>
+                <span className="text-2xl font-bold text-primary-600 dark:text-primary-400">
                   {stats.users.active7Days}
                 </span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-gray-600">Last 30 days</span>
-                <span className="text-2xl font-bold text-primary-600">
+                <span className="text-gray-600 dark:text-gray-400">Last 30 days</span>
+                <span className="text-2xl font-bold text-primary-600 dark:text-primary-400">
                   {stats.users.active30Days}
                 </span>
               </div>
             </div>
           </div>
 
-          <div className="bg-white p-6 rounded-lg border border-gray-200">
-            <h3 className="text-lg font-semibold mb-4">Content Overview</h3>
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
+            <h3 className="text-lg font-semibold mb-4 dark:text-gray-100">Content Overview</h3>
             <div className="space-y-3">
               <div className="flex justify-between items-center">
-                <span className="text-gray-600">Total Blogs</span>
-                <span className="text-2xl font-bold">{stats.blogs.total}</span>
+                <span className="text-gray-600 dark:text-gray-400">Total Blogs</span>
+                <span className="text-2xl font-bold dark:text-gray-100">{stats.blogs.total}</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-gray-600">New this month</span>
-                <span className="text-2xl font-bold text-green-600">
+                <span className="text-gray-600 dark:text-gray-400">New this month</span>
+                <span className="text-2xl font-bold text-green-600 dark:text-green-400">
                   +{stats.blogs.last30Days}
                 </span>
               </div>
@@ -198,13 +208,13 @@ export default function AdminDashboardPage() {
         {/* Charts */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
           {/* Registration Trend */}
-          <div className="bg-white p-6 rounded-lg border border-gray-200">
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
             <div className="flex justify-between items-center mb-4">
-              <h3 className="text-lg font-semibold">User Registration Trend</h3>
+              <h3 className="text-lg font-semibold dark:text-gray-100">User Registration Trend</h3>
               <select
                 value={period}
                 onChange={(e) => setPeriod(parseInt(e.target.value))}
-                className="px-3 py-1 border border-gray-300 rounded text-sm"
+                className="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded text-sm dark:bg-gray-700 dark:text-gray-100"
               >
                 <option value={7}>7 days</option>
                 <option value={30}>30 days</option>
@@ -215,17 +225,17 @@ export default function AdminDashboardPage() {
           </div>
 
           {/* Publication Trend */}
-          <div className="bg-white p-6 rounded-lg border border-gray-200">
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
             <div className="flex justify-between items-center mb-4">
-              <h3 className="text-lg font-semibold">Blog Publication Trend</h3>
+              <h3 className="text-lg font-semibold dark:text-gray-100">Blog Publication Trend</h3>
             </div>
             <SimpleLineChart data={publicationTrend} dataKey="count" color="#3b82f6" />
           </div>
         </div>
 
         {/* Engagement Trend */}
-        <div className="bg-white p-6 rounded-lg border border-gray-200 mb-8">
-          <h3 className="text-lg font-semibold mb-4">Engagement Trend</h3>
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700 mb-8">
+          <h3 className="text-lg font-semibold mb-4 dark:text-gray-100">Engagement Trend</h3>
           <MultiLineChart data={engagementTrend} />
         </div>
       </div>
@@ -250,24 +260,24 @@ function StatCard({
   changePositive?: boolean;
 }) {
   return (
-    <div className="bg-white p-6 rounded-lg border border-gray-200">
+    <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
       <div className="flex items-center justify-between mb-2">
-        <span className="text-sm font-medium text-gray-600">{title}</span>
+        <span className="text-sm font-medium text-gray-600 dark:text-gray-400">{title}</span>
         <span className="text-2xl">{icon}</span>
       </div>
       <div className="flex items-baseline gap-2">
-        <span className="text-3xl font-bold">{value}</span>
+        <span className="text-3xl font-bold dark:text-gray-100">{value}</span>
         {change && (
           <span
             className={`text-sm font-medium ${
-              changePositive ? 'text-green-600' : 'text-red-600'
+              changePositive ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'
             }`}
           >
             {change}
           </span>
         )}
       </div>
-      {subtitle && <p className="text-sm text-gray-500 mt-1">{subtitle}</p>}
+      {subtitle && <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{subtitle}</p>}
     </div>
   );
 }
@@ -283,7 +293,7 @@ function SimpleLineChart({
   color: string;
 }) {
   if (!data || data.length === 0) {
-    return <div className="text-center py-8 text-gray-500">No data available</div>;
+    return <div className="text-center py-8 text-gray-500 dark:text-gray-400">No data available</div>;
   }
 
   const maxValue = Math.max(...data.map((d) => d[dataKey] || 0));
@@ -319,7 +329,7 @@ function SimpleLineChart({
           );
         })}
       </svg>
-      <div className="flex justify-between text-xs text-gray-500 mt-2">
+      <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 mt-2">
         <span>{data[0]?.date}</span>
         <span>{data[data.length - 1]?.date}</span>
       </div>
@@ -330,7 +340,7 @@ function SimpleLineChart({
 // Multi-line Chart Component
 function MultiLineChart({ data }: { data: any[] }) {
   if (!data || data.length === 0) {
-    return <div className="text-center py-8 text-gray-500">No data available</div>;
+    return <div className="text-center py-8 text-gray-500 dark:text-gray-400">No data available</div>;
   }
 
   const maxValue = Math.max(
@@ -343,15 +353,15 @@ function MultiLineChart({ data }: { data: any[] }) {
       <div className="flex gap-4 mb-4">
         <div className="flex items-center gap-2">
           <div className="w-3 h-3 bg-blue-500 rounded"></div>
-          <span className="text-sm">Views</span>
+          <span className="text-sm dark:text-gray-300">Views</span>
         </div>
         <div className="flex items-center gap-2">
           <div className="w-3 h-3 bg-red-500 rounded"></div>
-          <span className="text-sm">Likes</span>
+          <span className="text-sm dark:text-gray-300">Likes</span>
         </div>
         <div className="flex items-center gap-2">
           <div className="w-3 h-3 bg-green-500 rounded"></div>
-          <span className="text-sm">Comments</span>
+          <span className="text-sm dark:text-gray-300">Comments</span>
         </div>
       </div>
       <div className="relative" style={{ height: `${height}px` }}>

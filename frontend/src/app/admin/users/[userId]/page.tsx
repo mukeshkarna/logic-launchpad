@@ -140,10 +140,10 @@ export default function AdminUserDetailsPage() {
 
   if (isLoading || loading || !userDetails) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center dark:bg-gray-900">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Loading user details...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 dark:border-primary-500 mx-auto"></div>
+          <p className="mt-4 text-gray-600 dark:text-gray-400">Loading user details...</p>
         </div>
       </div>
     );
@@ -152,19 +152,19 @@ export default function AdminUserDetailsPage() {
   const { user, stats } = userDetails;
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       {/* Header */}
-      <div className="bg-white border-b border-gray-200">
+      <div className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center gap-4">
             <Link
               href="/admin/users"
-              className="text-gray-600 hover:text-gray-900"
+              className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100"
             >
               ← Back to Users
             </Link>
             <div className="flex-1">
-              <h1 className="text-2xl font-bold text-gray-900">User Details</h1>
+              <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">User Details</h1>
             </div>
           </div>
         </div>
@@ -175,8 +175,8 @@ export default function AdminUserDetailsPage() {
           {/* Main Info */}
           <div className="lg:col-span-2 space-y-6">
             {/* Profile Card */}
-            <div className="bg-white rounded-lg border border-gray-200 p-6">
-              <h2 className="text-lg font-semibold mb-4">Profile Information</h2>
+            <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
+              <h2 className="text-lg font-semibold mb-4 dark:text-gray-100">Profile Information</h2>
               <div className="space-y-4">
                 <div className="flex items-center gap-4">
                   {user.avatar ? (
@@ -186,31 +186,31 @@ export default function AdminUserDetailsPage() {
                       className="w-20 h-20 rounded-full object-cover"
                     />
                   ) : (
-                    <div className="w-20 h-20 rounded-full bg-primary-600 text-white flex items-center justify-center text-2xl font-bold">
+                    <div className="w-20 h-20 rounded-full bg-primary-600 dark:bg-primary-500 text-white flex items-center justify-center text-2xl font-bold">
                       {user.fullName.charAt(0)}
                     </div>
                   )}
                   <div>
-                    <h3 className="text-xl font-bold">{user.fullName}</h3>
-                    <p className="text-gray-600">@{user.username}</p>
+                    <h3 className="text-xl font-bold dark:text-gray-100">{user.fullName}</h3>
+                    <p className="text-gray-600 dark:text-gray-400">@{user.username}</p>
                   </div>
                 </div>
 
                 <div className="grid grid-cols-2 gap-4 pt-4">
                   <div>
-                    <label className="text-sm text-gray-600">Email</label>
-                    <p className="font-medium">{user.email}</p>
+                    <label className="text-sm text-gray-600 dark:text-gray-400">Email</label>
+                    <p className="font-medium dark:text-gray-100">{user.email}</p>
                   </div>
                   <div>
-                    <label className="text-sm text-gray-600">Role</label>
+                    <label className="text-sm text-gray-600 dark:text-gray-400">Role</label>
                     <p className="font-medium">
                       <span
                         className={`px-2 py-1 rounded text-xs ${
                           user.role === 'SUPER_ADMIN'
-                            ? 'bg-purple-100 text-purple-700'
+                            ? 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400'
                             : user.role === 'MODERATOR'
-                            ? 'bg-blue-100 text-blue-700'
-                            : 'bg-gray-100 text-gray-700'
+                            ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400'
+                            : 'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300'
                         }`}
                       >
                         {user.role}
@@ -218,15 +218,15 @@ export default function AdminUserDetailsPage() {
                     </p>
                   </div>
                   <div>
-                    <label className="text-sm text-gray-600">Status</label>
+                    <label className="text-sm text-gray-600 dark:text-gray-400">Status</label>
                     <p className="font-medium">
                       <span
                         className={`px-2 py-1 rounded text-xs ${
                           user.status === 'ACTIVE'
-                            ? 'bg-green-100 text-green-700'
+                            ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400'
                             : user.status === 'SUSPENDED'
-                            ? 'bg-yellow-100 text-yellow-700'
-                            : 'bg-red-100 text-red-700'
+                            ? 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400'
+                            : 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400'
                         }`}
                       >
                         {user.status}
@@ -234,15 +234,15 @@ export default function AdminUserDetailsPage() {
                     </p>
                   </div>
                   <div>
-                    <label className="text-sm text-gray-600">Joined</label>
-                    <p className="font-medium">
+                    <label className="text-sm text-gray-600 dark:text-gray-400">Joined</label>
+                    <p className="font-medium dark:text-gray-100">
                       {new Date(user.createdAt).toLocaleDateString()}
                     </p>
                   </div>
                   {user.lastLoginAt && (
                     <div>
-                      <label className="text-sm text-gray-600">Last Login</label>
-                      <p className="font-medium">
+                      <label className="text-sm text-gray-600 dark:text-gray-400">Last Login</label>
+                      <p className="font-medium dark:text-gray-100">
                         {new Date(user.lastLoginAt).toLocaleDateString()}
                       </p>
                     </div>
@@ -250,20 +250,20 @@ export default function AdminUserDetailsPage() {
                 </div>
 
                 {user.bio && (
-                  <div className="pt-4 border-t">
-                    <label className="text-sm text-gray-600">Bio</label>
-                    <p className="mt-1">{user.bio}</p>
+                  <div className="pt-4 border-t dark:border-gray-700">
+                    <label className="text-sm text-gray-600 dark:text-gray-400">Bio</label>
+                    <p className="mt-1 dark:text-gray-300">{user.bio}</p>
                   </div>
                 )}
 
                 {user.status !== 'ACTIVE' && user.suspensionReason && (
-                  <div className="pt-4 border-t bg-yellow-50 p-4 rounded">
-                    <label className="text-sm font-medium text-yellow-800">
+                  <div className="pt-4 border-t dark:border-gray-700 bg-yellow-50 dark:bg-yellow-900/20 p-4 rounded">
+                    <label className="text-sm font-medium text-yellow-800 dark:text-yellow-400">
                       Suspension Reason
                     </label>
-                    <p className="mt-1 text-yellow-700">{user.suspensionReason}</p>
+                    <p className="mt-1 text-yellow-700 dark:text-yellow-300">{user.suspensionReason}</p>
                     {user.suspendedAt && (
-                      <p className="text-sm text-yellow-600 mt-1">
+                      <p className="text-sm text-yellow-600 dark:text-yellow-400 mt-1">
                         Suspended on: {new Date(user.suspendedAt).toLocaleString()}
                       </p>
                     )}
@@ -273,63 +273,63 @@ export default function AdminUserDetailsPage() {
             </div>
 
             {/* Statistics */}
-            <div className="bg-white rounded-lg border border-gray-200 p-6">
-              <h2 className="text-lg font-semibold mb-4">Statistics</h2>
+            <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
+              <h2 className="text-lg font-semibold mb-4 dark:text-gray-100">Statistics</h2>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div className="text-center p-4 bg-gray-50 rounded">
-                  <div className="text-2xl font-bold text-primary-600">
+                <div className="text-center p-4 bg-gray-50 dark:bg-gray-700 rounded">
+                  <div className="text-2xl font-bold text-primary-600 dark:text-primary-400">
                     {user._count.blogs}
                   </div>
-                  <div className="text-sm text-gray-600">Blogs</div>
+                  <div className="text-sm text-gray-600 dark:text-gray-400">Blogs</div>
                 </div>
-                <div className="text-center p-4 bg-gray-50 rounded">
-                  <div className="text-2xl font-bold text-blue-600">{stats.totalViews}</div>
-                  <div className="text-sm text-gray-600">Total Views</div>
+                <div className="text-center p-4 bg-gray-50 dark:bg-gray-700 rounded">
+                  <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">{stats.totalViews}</div>
+                  <div className="text-sm text-gray-600 dark:text-gray-400">Total Views</div>
                 </div>
-                <div className="text-center p-4 bg-gray-50 rounded">
-                  <div className="text-2xl font-bold text-green-600">
+                <div className="text-center p-4 bg-gray-50 dark:bg-gray-700 rounded">
+                  <div className="text-2xl font-bold text-green-600 dark:text-green-400">
                     {stats.totalLikes}
                   </div>
-                  <div className="text-sm text-gray-600">Total Likes</div>
+                  <div className="text-sm text-gray-600 dark:text-gray-400">Total Likes</div>
                 </div>
-                <div className="text-center p-4 bg-gray-50 rounded">
-                  <div className="text-2xl font-bold text-purple-600">
+                <div className="text-center p-4 bg-gray-50 dark:bg-gray-700 rounded">
+                  <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">
                     {stats.totalComments}
                   </div>
-                  <div className="text-sm text-gray-600">Comments</div>
+                  <div className="text-sm text-gray-600 dark:text-gray-400">Comments</div>
                 </div>
-                <div className="text-center p-4 bg-gray-50 rounded">
-                  <div className="text-2xl font-bold">{user._count.followers}</div>
-                  <div className="text-sm text-gray-600">Followers</div>
+                <div className="text-center p-4 bg-gray-50 dark:bg-gray-700 rounded">
+                  <div className="text-2xl font-bold dark:text-gray-100">{user._count.followers}</div>
+                  <div className="text-sm text-gray-600 dark:text-gray-400">Followers</div>
                 </div>
-                <div className="text-center p-4 bg-gray-50 rounded">
-                  <div className="text-2xl font-bold">{user._count.following}</div>
-                  <div className="text-sm text-gray-600">Following</div>
+                <div className="text-center p-4 bg-gray-50 dark:bg-gray-700 rounded">
+                  <div className="text-2xl font-bold dark:text-gray-100">{user._count.following}</div>
+                  <div className="text-sm text-gray-600 dark:text-gray-400">Following</div>
                 </div>
-                <div className="text-center p-4 bg-gray-50 rounded">
-                  <div className="text-2xl font-bold">{stats.avgViewsPerBlog}</div>
-                  <div className="text-sm text-gray-600">Avg Views/Blog</div>
+                <div className="text-center p-4 bg-gray-50 dark:bg-gray-700 rounded">
+                  <div className="text-2xl font-bold dark:text-gray-100">{stats.avgViewsPerBlog}</div>
+                  <div className="text-sm text-gray-600 dark:text-gray-400">Avg Views/Blog</div>
                 </div>
-                <div className="text-center p-4 bg-gray-50 rounded">
-                  <div className="text-2xl font-bold">{stats.engagementRate}%</div>
-                  <div className="text-sm text-gray-600">Engagement</div>
+                <div className="text-center p-4 bg-gray-50 dark:bg-gray-700 rounded">
+                  <div className="text-2xl font-bold dark:text-gray-100">{stats.engagementRate}%</div>
+                  <div className="text-sm text-gray-600 dark:text-gray-400">Engagement</div>
                 </div>
               </div>
             </div>
 
             {/* Recent Blogs */}
             {user.blogs && user.blogs.length > 0 && (
-              <div className="bg-white rounded-lg border border-gray-200 p-6">
-                <h2 className="text-lg font-semibold mb-4">Recent Blogs</h2>
+              <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
+                <h2 className="text-lg font-semibold mb-4 dark:text-gray-100">Recent Blogs</h2>
                 <div className="space-y-3">
                   {user.blogs.map((blog: any) => (
                     <div
                       key={blog.id}
-                      className="flex justify-between items-start p-3 hover:bg-gray-50 rounded"
+                      className="flex justify-between items-start p-3 hover:bg-gray-50 dark:hover:bg-gray-700/50 rounded"
                     >
                       <div className="flex-1">
-                        <h4 className="font-medium">{blog.title}</h4>
-                        <div className="flex gap-3 text-sm text-gray-600 mt-1">
+                        <h4 className="font-medium dark:text-gray-100">{blog.title}</h4>
+                        <div className="flex gap-3 text-sm text-gray-600 dark:text-gray-400 mt-1">
                           <span>{blog._count.views} views</span>
                           <span>{blog._count.likes} likes</span>
                           <span>{blog._count.comments} comments</span>
@@ -338,8 +338,8 @@ export default function AdminUserDetailsPage() {
                       <span
                         className={`text-xs px-2 py-1 rounded ${
                           blog.status === 'PUBLISHED'
-                            ? 'bg-green-100 text-green-700'
-                            : 'bg-gray-100 text-gray-700'
+                            ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400'
+                            : 'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300'
                         }`}
                       >
                         {blog.status}
@@ -355,27 +355,27 @@ export default function AdminUserDetailsPage() {
           <div className="space-y-6">
             {/* Role Management */}
             {currentUser?.role === 'SUPER_ADMIN' && user.id !== currentUser.id && (
-              <div className="bg-white rounded-lg border border-gray-200 p-6">
-                <h3 className="font-semibold mb-4">Role Management</h3>
+              <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
+                <h3 className="font-semibold mb-4 dark:text-gray-100">Role Management</h3>
                 <div className="space-y-2">
                   <button
                     onClick={() => handleUpdateRole('USER')}
                     disabled={actionLoading || user.role === 'USER'}
-                    className="w-full px-4 py-2 text-left border border-gray-300 rounded hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full px-4 py-2 text-left border border-gray-300 dark:border-gray-600 rounded hover:bg-gray-50 dark:hover:bg-gray-700 dark:text-gray-300 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     Set as User
                   </button>
                   <button
                     onClick={() => handleUpdateRole('MODERATOR')}
                     disabled={actionLoading || user.role === 'MODERATOR'}
-                    className="w-full px-4 py-2 text-left border border-gray-300 rounded hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full px-4 py-2 text-left border border-gray-300 dark:border-gray-600 rounded hover:bg-gray-50 dark:hover:bg-gray-700 dark:text-gray-300 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     Set as Moderator
                   </button>
                   <button
                     onClick={() => handleUpdateRole('SUPER_ADMIN')}
                     disabled={actionLoading || user.role === 'SUPER_ADMIN'}
-                    className="w-full px-4 py-2 text-left border border-gray-300 rounded hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full px-4 py-2 text-left border border-gray-300 dark:border-gray-600 rounded hover:bg-gray-50 dark:hover:bg-gray-700 dark:text-gray-300 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     Set as Super Admin
                   </button>
@@ -385,22 +385,22 @@ export default function AdminUserDetailsPage() {
 
             {/* Account Actions */}
             {user.id !== currentUser?.id && (
-              <div className="bg-white rounded-lg border border-gray-200 p-6">
-                <h3 className="font-semibold mb-4">Account Actions</h3>
+              <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
+                <h3 className="font-semibold mb-4 dark:text-gray-100">Account Actions</h3>
                 <div className="space-y-2">
                   {user.status === 'ACTIVE' ? (
                     <>
                       <button
                         onClick={handleSuspend}
                         disabled={actionLoading}
-                        className="w-full px-4 py-2 bg-yellow-600 text-white rounded hover:bg-yellow-700 disabled:opacity-50"
+                        className="w-full px-4 py-2 bg-yellow-600 dark:bg-yellow-600 text-white rounded hover:bg-yellow-700 dark:hover:bg-yellow-700 disabled:opacity-50"
                       >
                         Suspend User
                       </button>
                       <button
                         onClick={handleBan}
                         disabled={actionLoading}
-                        className="w-full px-4 py-2 bg-orange-600 text-white rounded hover:bg-orange-700 disabled:opacity-50"
+                        className="w-full px-4 py-2 bg-orange-600 dark:bg-orange-600 text-white rounded hover:bg-orange-700 dark:hover:bg-orange-700 disabled:opacity-50"
                       >
                         Ban User
                       </button>
@@ -409,7 +409,7 @@ export default function AdminUserDetailsPage() {
                     <button
                       onClick={handleReinstate}
                       disabled={actionLoading}
-                      className="w-full px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 disabled:opacity-50"
+                      className="w-full px-4 py-2 bg-green-600 dark:bg-green-600 text-white rounded hover:bg-green-700 dark:hover:bg-green-700 disabled:opacity-50"
                     >
                       Reinstate User
                     </button>
@@ -418,7 +418,7 @@ export default function AdminUserDetailsPage() {
                     <button
                       onClick={handleDelete}
                       disabled={actionLoading}
-                      className="w-full px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 disabled:opacity-50"
+                      className="w-full px-4 py-2 bg-red-600 dark:bg-red-600 text-white rounded hover:bg-red-700 dark:hover:bg-red-700 disabled:opacity-50"
                     >
                       Delete User
                     </button>
@@ -428,12 +428,12 @@ export default function AdminUserDetailsPage() {
             )}
 
             {/* Quick Links */}
-            <div className="bg-white rounded-lg border border-gray-200 p-6">
-              <h3 className="font-semibold mb-4">Quick Links</h3>
+            <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
+              <h3 className="font-semibold mb-4 dark:text-gray-100">Quick Links</h3>
               <div className="space-y-2">
                 <Link
                   href={`/${user.username}`}
-                  className="block px-4 py-2 text-primary-600 border border-primary-300 rounded hover:bg-primary-50 text-center"
+                  className="block px-4 py-2 text-primary-600 dark:text-primary-400 border border-primary-300 dark:border-primary-500 rounded hover:bg-primary-50 dark:hover:bg-primary-900/20 text-center"
                 >
                   View Public Profile
                 </Link>
@@ -442,13 +442,13 @@ export default function AdminUserDetailsPage() {
 
             {/* Moderation Notes */}
             {user.receivedNotes && user.receivedNotes.length > 0 && (
-              <div className="bg-white rounded-lg border border-gray-200 p-6">
-                <h3 className="font-semibold mb-4">Moderation Notes</h3>
+              <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
+                <h3 className="font-semibold mb-4 dark:text-gray-100">Moderation Notes</h3>
                 <div className="space-y-3">
                   {user.receivedNotes.map((note: any) => (
-                    <div key={note.id} className="text-sm border-l-2 border-yellow-400 pl-3 py-1">
-                      <p className="text-gray-700">{note.content}</p>
-                      <p className="text-xs text-gray-500 mt-1">
+                    <div key={note.id} className="text-sm border-l-2 border-yellow-400 dark:border-yellow-500 pl-3 py-1">
+                      <p className="text-gray-700 dark:text-gray-300">{note.content}</p>
+                      <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
                         By {note.moderator.fullName} on{' '}
                         {new Date(note.createdAt).toLocaleDateString()}
                       </p>

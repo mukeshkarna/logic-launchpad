@@ -87,12 +87,12 @@ export default function AdminUsersPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="bg-white border-b border-gray-200">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+      <div className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex justify-between items-center">
-            <h1 className="text-2xl font-bold">User Management</h1>
-            <Link href="/admin" className="px-4 py-2 border rounded-lg hover:bg-gray-50">
+            <h1 className="text-2xl font-bold dark:text-gray-100">User Management</h1>
+            <Link href="/admin" className="px-4 py-2 border dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 dark:text-gray-300">
               ← Back to Dashboard
             </Link>
           </div>
@@ -101,7 +101,7 @@ export default function AdminUsersPage() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Filters */}
-        <div className="bg-white p-4 rounded-lg border mb-6">
+        <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border dark:border-gray-700 mb-6">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <input
               type="text"
@@ -111,7 +111,7 @@ export default function AdminUsersPage() {
                 setSearch(e.target.value);
                 setPage(1);
               }}
-              className="px-4 py-2 border rounded-lg"
+              className="px-4 py-2 border dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-gray-100 dark:placeholder-gray-400"
             />
             <select
               value={roleFilter}
@@ -119,7 +119,7 @@ export default function AdminUsersPage() {
                 setRoleFilter(e.target.value);
                 setPage(1);
               }}
-              className="px-4 py-2 border rounded-lg"
+              className="px-4 py-2 border dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-gray-100"
             >
               <option value="">All Roles</option>
               <option value="USER">User</option>
@@ -132,7 +132,7 @@ export default function AdminUsersPage() {
                 setStatusFilter(e.target.value);
                 setPage(1);
               }}
-              className="px-4 py-2 border rounded-lg"
+              className="px-4 py-2 border dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-gray-100"
             >
               <option value="">All Statuses</option>
               <option value="ACTIVE">Active</option>
@@ -146,7 +146,7 @@ export default function AdminUsersPage() {
                 setStatusFilter('');
                 setPage(1);
               }}
-              className="px-4 py-2 border rounded-lg hover:bg-gray-50"
+              className="px-4 py-2 border dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 dark:text-gray-300"
             >
               Clear Filters
             </button>
@@ -156,75 +156,75 @@ export default function AdminUsersPage() {
         {/* Users Table */}
         {loading ? (
           <div className="text-center py-12">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 dark:border-primary-500 mx-auto"></div>
           </div>
         ) : (
           <>
-            <div className="bg-white rounded-lg border overflow-hidden">
-              <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-50">
+            <div className="bg-white dark:bg-gray-800 rounded-lg border dark:border-gray-700 overflow-hidden">
+              <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                <thead className="bg-gray-50 dark:bg-gray-700">
                   <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">User</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Role</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Blogs</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Joined</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">User</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">Role</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">Status</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">Blogs</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">Joined</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">Actions</th>
                   </tr>
                 </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
+                <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                   {users.map((u) => (
-                    <tr key={u.id} className="hover:bg-gray-50">
+                    <tr key={u.id} className="hover:bg-gray-50 dark:hover:bg-gray-700/50">
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div>
-                          <div className="font-medium">{u.fullName}</div>
-                          <div className="text-sm text-gray-500">@{u.username}</div>
-                          <div className="text-sm text-gray-500">{u.email}</div>
+                          <div className="font-medium dark:text-gray-100">{u.fullName}</div>
+                          <div className="text-sm text-gray-500 dark:text-gray-400">@{u.username}</div>
+                          <div className="text-sm text-gray-500 dark:text-gray-400">{u.email}</div>
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <span className={`px-2 py-1 text-xs rounded ${
-                          u.role === 'SUPER_ADMIN' ? 'bg-purple-100 text-purple-700' :
-                          u.role === 'MODERATOR' ? 'bg-blue-100 text-blue-700' :
-                          'bg-gray-100 text-gray-700'
+                          u.role === 'SUPER_ADMIN' ? 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400' :
+                          u.role === 'MODERATOR' ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400' :
+                          'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300'
                         }`}>
                           {u.role}
                         </span>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <span className={`px-2 py-1 text-xs rounded ${
-                          u.status === 'ACTIVE' ? 'bg-green-100 text-green-700' :
-                          u.status === 'SUSPENDED' ? 'bg-yellow-100 text-yellow-700' :
-                          'bg-red-100 text-red-700'
+                          u.status === 'ACTIVE' ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400' :
+                          u.status === 'SUSPENDED' ? 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400' :
+                          'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400'
                         }`}>
                           {u.status}
                         </span>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm dark:text-gray-300">
                         {u._count.blogs}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
                         {new Date(u.createdAt).toLocaleDateString()}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm">
                         <div className="flex gap-2">
                           <Link
                             href={`/admin/users/${u.id}`}
-                            className="text-blue-600 hover:text-blue-800"
+                            className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300"
                           >
                             View
                           </Link>
                           {u.status === 'ACTIVE' ? (
                             <button
                               onClick={() => handleSuspend(u.id)}
-                              className="text-yellow-600 hover:text-yellow-800"
+                              className="text-yellow-600 dark:text-yellow-400 hover:text-yellow-800 dark:hover:text-yellow-300"
                             >
                               Suspend
                             </button>
                           ) : (
                             <button
                               onClick={() => handleReinstate(u.id)}
-                              className="text-green-600 hover:text-green-800"
+                              className="text-green-600 dark:text-green-400 hover:text-green-800 dark:hover:text-green-300"
                             >
                               Reinstate
                             </button>
@@ -232,7 +232,7 @@ export default function AdminUsersPage() {
                           {user?.role === 'SUPER_ADMIN' && (
                             <button
                               onClick={() => handleDelete(u.id)}
-                              className="text-red-600 hover:text-red-800"
+                              className="text-red-600 dark:text-red-400 hover:text-red-800 dark:hover:text-red-300"
                             >
                               Delete
                             </button>
@@ -250,17 +250,17 @@ export default function AdminUsersPage() {
               <button
                 onClick={() => setPage((p) => Math.max(1, p - 1))}
                 disabled={page === 1}
-                className="px-4 py-2 border rounded-lg hover:bg-gray-50 disabled:opacity-50"
+                className="px-4 py-2 border dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 dark:text-gray-300 disabled:opacity-50"
               >
                 Previous
               </button>
-              <span className="px-4 py-2">
+              <span className="px-4 py-2 dark:text-gray-300">
                 Page {page} of {totalPages}
               </span>
               <button
                 onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
                 disabled={page === totalPages}
-                className="px-4 py-2 border rounded-lg hover:bg-gray-50 disabled:opacity-50"
+                className="px-4 py-2 border dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 dark:text-gray-300 disabled:opacity-50"
               >
                 Next
               </button>

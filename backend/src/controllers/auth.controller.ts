@@ -77,25 +77,28 @@ export const register = async (req: Request, res: Response) => {
     });
   } catch (error) {
     console.error('Registration error:', error);
-    res.status(500).json({ error: 'Failed to register user' });
+    return res.status(500).json({ error: 'Failed to register user' });
   }
 };
 
 // Login user
-export const login = async (req: Request, res: Response) => {
+export const login = async (req: Request, res: Response): Promise<void> => {
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+      res.status(400).json({ errors: errors.array() });
+      return;
     }
 
-    passport.authenticate('local', { session: false }, (err: any, user: any, info: any) => {
+    passport.authenticate('local', { session: false }, (err: any, user: any, info: any): void => {
       if (err) {
-        return res.status(500).json({ error: 'Authentication error' });
+        res.status(500).json({ error: 'Authentication error' });
+        return;
       }
 
       if (!user) {
-        return res.status(401).json({ error: info?.message || 'Invalid credentials' });
+        res.status(401).json({ error: info?.message || 'Invalid credentials' });
+        return;
       }
 
       // Generate token
@@ -164,14 +167,14 @@ export const getMe = async (req: AuthRequest, res: Response) => {
       return res.status(404).json({ error: 'User not found' });
     }
 
-    res.json({ user });
+    return res.json({ user });
   } catch (error) {
     console.error('Get me error:', error);
-    res.status(500).json({ error: 'Failed to fetch user' });
+    return res.status(500).json({ error: 'Failed to fetch user' });
   }
 };
 
 // Logout (for session-based auth, otherwise just remove token on client)
-export const logout = (req: Request, res: Response) => {
+export const logout = (_req: Request, res: Response) => {
   res.json({ message: 'Logged out successfully' });
 };

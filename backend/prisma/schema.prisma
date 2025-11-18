@@ -1,0 +1,203 @@
+// Prisma Schema for Medium-like Blogging Platform
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// User model with authentication support
+model User {
+  id            String    @id @default(uuid())
+  email         String    @unique
+  username      String    @unique
+  password      String?   // Nullable for OAuth users
+  fullName      String
+  bio           String?   @db.Text
+  avatar        String?
+  googleId      String?   @unique
+
+  // Timestamps
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Relations
+  blogs         Blog[]
+  comments      Comment[]
+  likes         Like[]
+  views         View[]
+  followers     Follow[]  @relation("UserFollowers")
+  following     Follow[]  @relation("UserFollowing")
+
+  @@index([email])
+  @@index([username])
+  @@map("users")
+}
+
+// Blog post model
+model Blog {
+  id            String    @id @default(uuid())
+  title         String
+  slug          String    @unique
+  content       String    @db.Text // Rich text content in JSON format
+  excerpt       String?   @db.Text
+  coverImage    String?
+
+  // Status and visibility
+  status        BlogStatus @default(DRAFT)
+  published     Boolean   @default(false)
+  publishedAt   DateTime?
+
+  // SEO
+  metaTitle     String?
+  metaDescription String?  @db.Text
+
+  // Timestamps
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Author relation
+  authorId      String
+  author        User      @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  // Relations
+  comments      Comment[]
+  likes         Like[]
+  views         View[]
+  tags          BlogTag[]
+
+  @@index([slug])
+  @@index([authorId])
+  @@index([status])
+  @@index([publishedAt])
+  @@map("blogs")
+}
+
+// Blog status enum
+enum BlogStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+// Tag model for categorizing blogs
+model Tag {
+  id        String    @id @default(uuid())
+  name      String    @unique
+  slug      String    @unique
+
+  createdAt DateTime  @default(now())
+
+  blogs     BlogTag[]
+
+  @@index([slug])
+  @@map("tags")
+}
+
+// Many-to-many relation between Blog and Tag
+model BlogTag {
+  id        String   @id @default(uuid())
+  blogId    String
+  tagId     String
+
+  blog      Blog     @relation(fields: [blogId], references: [id], onDelete: Cascade)
+  tag       Tag      @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@unique([blogId, tagId])
+  @@index([blogId])
+  @@index([tagId])
+  @@map("blog_tags")
+}
+
+// Comment model with threading support
+model Comment {
+  id          String    @id @default(uuid())
+  content     String    @db.Text
+
+  // Timestamps
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  // Author relation
+  authorId    String
+  author      User      @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  // Blog relation
+  blogId      String
+  blog        Blog      @relation(fields: [blogId], references: [id], onDelete: Cascade)
+
+  // Threading support
+  parentId    String?
+  parent      Comment?  @relation("CommentReplies", fields: [parentId], references: [id], onDelete: Cascade)
+  replies     Comment[] @relation("CommentReplies")
+
+  @@index([blogId])
+  @@index([authorId])
+  @@index([parentId])
+  @@map("comments")
+}
+
+// Like model for blogs
+model Like {
+  id        String   @id @default(uuid())
+
+  createdAt DateTime @default(now())
+
+  // User relation
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Blog relation
+  blogId    String
+  blog      Blog     @relation(fields: [blogId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, blogId])
+  @@index([blogId])
+  @@index([userId])
+  @@map("likes")
+}
+
+// View model for analytics
+model View {
+  id        String   @id @default(uuid())
+
+  createdAt DateTime @default(now())
+
+  // User relation (nullable for anonymous views)
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  // Blog relation
+  blogId    String
+  blog      Blog     @relation(fields: [blogId], references: [id], onDelete: Cascade)
+
+  // Track IP for anonymous users (optional)
+  ipAddress String?
+
+  @@index([blogId])
+  @@index([userId])
+  @@index([createdAt])
+  @@map("views")
+}
+
+// Follow model for user connections
+model Follow {
+  id          String   @id @default(uuid())
+
+  createdAt   DateTime @default(now())
+
+  // Follower relation
+  followerId  String
+  follower    User     @relation("UserFollowing", fields: [followerId], references: [id], onDelete: Cascade)
+
+  // Following relation
+  followingId String
+  following   User     @relation("UserFollowers", fields: [followingId], references: [id], onDelete: Cascade)
+
+  @@unique([followerId, followingId])
+  @@index([followerId])
+  @@index([followingId])
+  @@map("follows")
+}

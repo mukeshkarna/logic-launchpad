@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-white text-gray-900;
+  }
+}
+
+@layer components {
+  /* Tip Tap Editor Styles */
+  .ProseMirror {
+    @apply outline-none min-h-[300px] prose max-w-none;
+  }
+
+  .ProseMirror p.is-editor-empty:first-child::before {
+    @apply text-gray-400 float-left h-0 pointer-events-none;
+    content: attr(data-placeholder);
+  }
+
+  .ProseMirror h1 {
+    @apply text-4xl font-bold mt-8 mb-4;
+  }
+
+  .ProseMirror h2 {
+    @apply text-3xl font-bold mt-6 mb-3;
+  }
+
+  .ProseMirror h3 {
+    @apply text-2xl font-bold mt-4 mb-2;
+  }
+
+  .ProseMirror p {
+    @apply mb-4;
+  }
+
+  .ProseMirror ul,
+  .ProseMirror ol {
+    @apply pl-6 mb-4;
+  }
+
+  .ProseMirror ul {
+    @apply list-disc;
+  }
+
+  .ProseMirror ol {
+    @apply list-decimal;
+  }
+
+  .ProseMirror code {
+    @apply bg-gray-100 px-1.5 py-0.5 rounded text-sm font-mono;
+  }
+
+  .ProseMirror pre {
+    @apply bg-gray-900 text-white p-4 rounded-lg overflow-x-auto mb-4;
+  }
+
+  .ProseMirror pre code {
+    @apply bg-transparent p-0;
+  }
+
+  .ProseMirror blockquote {
+    @apply border-l-4 border-gray-300 pl-4 italic my-4;
+  }
+
+  .ProseMirror img {
+    @apply max-w-full h-auto rounded-lg my-4;
+  }
+
+  .ProseMirror table {
+    @apply border-collapse table-auto w-full my-4;
+  }
+
+  .ProseMirror th {
+    @apply border border-gray-300 px-4 py-2 bg-gray-100 font-bold text-left;
+  }
+
+  .ProseMirror td {
+    @apply border border-gray-300 px-4 py-2;
+  }
+
+  .ProseMirror a {
+    @apply text-primary-600 underline hover:text-primary-700;
+  }
+
+  /* Editor Toolbar */
+  .editor-toolbar {
+    @apply flex flex-wrap gap-1 p-2 border-b border-gray-200 bg-gray-50 sticky top-0 z-10;
+  }
+
+  .editor-toolbar button {
+    @apply px-3 py-1.5 rounded hover:bg-gray-200 transition-colors text-sm font-medium;
+  }
+
+  .editor-toolbar button.is-active {
+    @apply bg-primary-100 text-primary-700;
+  }
+
+  /* Floating Menu */
+  .floating-menu {
+    @apply flex gap-1 bg-white shadow-lg rounded-lg p-1 border border-gray-200;
+  }
+
+  .floating-menu button {
+    @apply px-2 py-1 rounded hover:bg-gray-100 transition-colors;
+  }
+}

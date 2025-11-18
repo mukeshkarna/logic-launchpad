@@ -22,11 +22,10 @@ services:
       retries: 5
 
   backend:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
+    image: node:18-alpine
     container_name: blog-backend
     restart: unless-stopped
+    working_dir: /app
     ports:
       - "5000:5000"
     environment:
@@ -47,15 +46,13 @@ services:
         condition: service_healthy
     networks:
       - blog-network
-    command: npm run dev
+    command: sh -c "npm install && npx prisma generate && npm run dev"
 
   frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-      target: development
+    image: node:18-alpine
     container_name: blog-frontend
     restart: unless-stopped
+    working_dir: /app
     ports:
       - "3000:3000"
     environment:
@@ -70,7 +67,7 @@ services:
       - backend
     networks:
       - blog-network
-    command: npm run dev
+    command: sh -c "npm install && npm run dev"
 
 volumes:
   postgres-data:

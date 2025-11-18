@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply bg-white text-gray-900;
+    @apply bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-100;
   }
 }
 
@@ -49,11 +49,11 @@
   }
 
   .ProseMirror code {
-    @apply bg-gray-100 px-1.5 py-0.5 rounded text-sm font-mono;
+    @apply bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded text-sm font-mono;
   }
 
   .ProseMirror pre {
-    @apply bg-gray-900 text-white p-4 rounded-lg overflow-x-auto mb-4;
+    @apply bg-gray-900 dark:bg-gray-950 text-white p-4 rounded-lg overflow-x-auto mb-4;
   }
 
   .ProseMirror pre code {
@@ -61,7 +61,7 @@
   }
 
   .ProseMirror blockquote {
-    @apply border-l-4 border-gray-300 pl-4 italic my-4;
+    @apply border-l-4 border-gray-300 dark:border-gray-600 pl-4 italic my-4;
   }
 
   .ProseMirror img {
@@ -74,7 +74,7 @@
   }
 
   .ProseMirror th {
-    @apply px-4 py-3 bg-gray-100 font-bold text-left min-w-[100px];
+    @apply px-4 py-3 bg-gray-100 dark:bg-gray-800 font-bold text-left min-w-[100px];
     border: 2px solid #9ca3af;
   }
 
@@ -93,36 +93,36 @@
 
   /* Editor Toolbar */
   .editor-toolbar {
-    @apply flex flex-wrap gap-1 p-2 border-b border-gray-200 bg-gray-50 sticky top-0 z-10;
+    @apply flex flex-wrap gap-1 p-2 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 sticky top-0 z-10;
   }
 
   .editor-toolbar button {
-    @apply px-3 py-1.5 rounded hover:bg-gray-200 transition-colors text-sm font-medium;
+    @apply px-3 py-1.5 rounded hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors text-sm font-medium;
   }
 
   .editor-toolbar button.is-active {
-    @apply bg-primary-100 text-primary-700;
+    @apply bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300;
   }
 
   /* Bubble Menu */
   .bubble-menu {
-    @apply flex gap-1 bg-white shadow-xl rounded-lg p-2 border border-gray-200;
+    @apply flex gap-1 bg-white dark:bg-gray-800 shadow-xl rounded-lg p-2 border border-gray-200 dark:border-gray-700;
   }
 
   .bubble-menu button {
-    @apply px-3 py-2 rounded hover:bg-gray-100 transition-colors text-sm font-medium;
+    @apply px-3 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-sm font-medium;
   }
 
   .bubble-menu button.is-active {
-    @apply bg-primary-100 text-primary-700;
+    @apply bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300;
   }
 
   /* Slash Command Menu */
   .slash-menu-item {
-    @apply w-full flex items-start gap-3 px-3 py-2.5 text-left hover:bg-gray-100 rounded transition-colors;
+    @apply w-full flex items-start gap-3 px-3 py-2.5 text-left hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors;
   }
 
   .slash-menu-item:hover {
-    @apply bg-primary-50;
+    @apply bg-primary-50 dark:bg-primary-900;
   }
 }

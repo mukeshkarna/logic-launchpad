@@ -319,20 +319,32 @@ export const getAdminActions = async (req: AuthRequest, res: Response) => {
         orderBy: { createdAt: 'desc' },
         include: {
           admin: {
-            select: { id: true, username: true, fullName: true, avatar: true, role: true }
+            select: { id: true, email: true, username: true, fullName: true, avatar: true, role: true }
           }
         }
       }),
       prisma.adminAction.count({ where })
     ]);
 
+    // Transform response to match frontend expectations
+    const logs = actions.map(action => ({
+      id: action.id,
+      action: action.action,
+      performedBy: action.admin,
+      targetType: action.targetType,
+      targetId: action.targetId,
+      details: action.details,
+      ipAddress: action.ipAddress,
+      createdAt: action.createdAt
+    }));
+
     return res.json({
-      actions,
+      logs,
       pagination: {
         page,
         limit,
         total,
-        totalPages: Math.ceil(total / limit)
+        pages: Math.ceil(total / limit)
       }
     });
   } catch (error) {

@@ -84,7 +84,13 @@ export const auditLog = (action: string) => {
       // Only log if the request was successful
       if (res.statusCode < 400 && req.user) {
         const targetType = req.params.type || req.body.targetType;
-        const targetId = req.params.id || req.body.id || req.body.targetId;
+        const targetId =
+          req.params.id ||
+          req.params.userId ||
+          req.params.blogId ||
+          req.params.reportId ||
+          req.body.id ||
+          req.body.targetId;
         const ipAddress = req.ip || req.socket.remoteAddress;
 
         logAdminAction(

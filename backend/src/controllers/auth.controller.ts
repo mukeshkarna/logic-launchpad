@@ -63,6 +63,7 @@ export const register = async (req: Request, res: Response) => {
         fullName: true,
         bio: true,
         avatar: true,
+        role: true,
         createdAt: true,
       },
     });
@@ -152,6 +153,7 @@ export const getMe = async (req: AuthRequest, res: Response) => {
         fullName: true,
         bio: true,
         avatar: true,
+        role: true,
         createdAt: true,
         _count: {
           select: {

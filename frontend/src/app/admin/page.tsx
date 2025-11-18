@@ -93,7 +93,7 @@ export default function AdminDashboardPage() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Quick Links */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-8">
           <Link
             href="/admin/users"
             className="p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-primary-500 dark:hover:border-primary-400 hover:shadow-md transition-all"
@@ -126,6 +126,16 @@ export default function AdminDashboardPage() {
             <div className="font-semibold dark:text-gray-100">Settings</div>
             <div className="text-sm text-gray-600 dark:text-gray-400">Platform configuration</div>
           </Link>
+          {user?.role === 'SUPER_ADMIN' && (
+            <Link
+              href="/admin/audit-log"
+              className="p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-primary-500 dark:hover:border-primary-400 hover:shadow-md transition-all"
+            >
+              <div className="text-3xl mb-2">📋</div>
+              <div className="font-semibold dark:text-gray-100">Audit Log</div>
+              <div className="text-sm text-gray-600 dark:text-gray-400">Track admin actions</div>
+            </Link>
+          )}
         </div>
 
         {/* Statistics Cards */}

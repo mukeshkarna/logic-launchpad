@@ -80,10 +80,10 @@ export const createBlog = async (req: AuthRequest, res: Response) => {
       }
     }
 
-    res.status(201).json({ blog });
+    return res.status(201).json({ blog });
   } catch (error) {
     console.error('Create blog error:', error);
-    res.status(500).json({ error: 'Failed to create blog' });
+    return res.status(500).json({ error: 'Failed to create blog' });
   }
 };
 
@@ -157,10 +157,10 @@ export const updateBlog = async (req: AuthRequest, res: Response) => {
       }
     });
 
-    res.json({ blog });
+    return res.json({ blog });
   } catch (error) {
     console.error('Update blog error:', error);
-    res.status(500).json({ error: 'Failed to update blog' });
+    return res.status(500).json({ error: 'Failed to update blog' });
   }
 };
 
@@ -186,10 +186,10 @@ export const deleteBlog = async (req: AuthRequest, res: Response) => {
       where: { id }
     });
 
-    res.json({ message: 'Blog deleted successfully' });
+    return res.json({ message: 'Blog deleted successfully' });
   } catch (error) {
     console.error('Delete blog error:', error);
-    res.status(500).json({ error: 'Failed to delete blog' });
+    return res.status(500).json({ error: 'Failed to delete blog' });
   }
 };
 
@@ -254,10 +254,10 @@ export const getBlog = async (req: AuthRequest, res: Response) => {
       isLiked = !!like;
     }
 
-    res.json({ blog, isLiked });
+    return res.json({ blog, isLiked });
   } catch (error) {
     console.error('Get blog error:', error);
-    res.status(500).json({ error: 'Failed to fetch blog' });
+    return res.status(500).json({ error: 'Failed to fetch blog' });
   }
 };
 
@@ -325,7 +325,7 @@ export const getBlogs = async (req: AuthRequest, res: Response) => {
       prisma.blog.count({ where })
     ]);
 
-    res.json({
+    return res.json({
       blogs,
       pagination: {
         page,
@@ -336,7 +336,7 @@ export const getBlogs = async (req: AuthRequest, res: Response) => {
     });
   } catch (error) {
     console.error('Get blogs error:', error);
-    res.status(500).json({ error: 'Failed to fetch blogs' });
+    return res.status(500).json({ error: 'Failed to fetch blogs' });
   }
 };
 
@@ -370,10 +370,10 @@ export const getMyBlogs = async (req: AuthRequest, res: Response) => {
       }
     });
 
-    res.json({ blogs });
+    return res.json({ blogs });
   } catch (error) {
     console.error('Get my blogs error:', error);
-    res.status(500).json({ error: 'Failed to fetch blogs' });
+    return res.status(500).json({ error: 'Failed to fetch blogs' });
   }
 };
 
@@ -421,10 +421,10 @@ export const getUserBlogs = async (req: AuthRequest, res: Response) => {
       }
     });
 
-    res.json({ blogs, user });
+    return res.json({ blogs, user });
   } catch (error) {
     console.error('Get user blogs error:', error);
-    res.status(500).json({ error: 'Failed to fetch user blogs' });
+    return res.status(500).json({ error: 'Failed to fetch user blogs' });
   }
 };
 
@@ -455,10 +455,10 @@ export const publishBlog = async (req: AuthRequest, res: Response) => {
       }
     });
 
-    res.json({ blog: updatedBlog });
+    return res.json({ blog: updatedBlog });
   } catch (error) {
     console.error('Publish blog error:', error);
-    res.status(500).json({ error: 'Failed to publish blog' });
+    return res.status(500).json({ error: 'Failed to publish blog' });
   }
 };
 
@@ -488,9 +488,9 @@ export const unpublishBlog = async (req: AuthRequest, res: Response) => {
       }
     });
 
-    res.json({ blog: updatedBlog });
+    return res.json({ blog: updatedBlog });
   } catch (error) {
     console.error('Unpublish blog error:', error);
-    res.status(500).json({ error: 'Failed to unpublish blog' });
+    return res.status(500).json({ error: 'Failed to unpublish blog' });
   }
 };

@@ -49,7 +49,7 @@ export const getBlogAnalytics = async (req: AuthRequest, res: Response) => {
       select: { userId: true }
     });
 
-    res.json({
+    return res.json({
       blogId,
       analytics: {
         totalViews: viewsCount,
@@ -64,7 +64,7 @@ export const getBlogAnalytics = async (req: AuthRequest, res: Response) => {
     });
   } catch (error) {
     console.error('Get blog analytics error:', error);
-    res.status(500).json({ error: 'Failed to fetch blog analytics' });
+    return res.status(500).json({ error: 'Failed to fetch blog analytics' });
   }
 };
 
@@ -120,12 +120,12 @@ export const getUserAnalytics = async (req: AuthRequest, res: Response) => {
         comments: blog._count.comments,
       }));
 
-    res.json({
+    return res.json({
       overview: totalStats,
       topBlogs,
     });
   } catch (error) {
     console.error('Get user analytics error:', error);
-    res.status(500).json({ error: 'Failed to fetch user analytics' });
+    return res.status(500).json({ error: 'Failed to fetch user analytics' });
   }
 };

@@ -41,7 +41,7 @@ export const toggleLike = async (req: AuthRequest, res: Response) => {
         where: { id: existingLike.id }
       });
 
-      res.json({ liked: false, message: 'Blog unliked' });
+      return res.json({ liked: false, message: 'Blog unliked' });
     } else {
       // Like
       await prisma.like.create({
@@ -51,11 +51,11 @@ export const toggleLike = async (req: AuthRequest, res: Response) => {
         }
       });
 
-      res.json({ liked: true, message: 'Blog liked' });
+      return res.json({ liked: true, message: 'Blog liked' });
     }
   } catch (error) {
     console.error('Toggle like error:', error);
-    res.status(500).json({ error: 'Failed to toggle like' });
+    return res.status(500).json({ error: 'Failed to toggle like' });
   }
 };
 
@@ -78,9 +78,9 @@ export const getBlogLikes = async (req: Request, res: Response) => {
       }
     });
 
-    res.json({ likes, count: likes.length });
+    return res.json({ likes, count: likes.length });
   } catch (error) {
     console.error('Get blog likes error:', error);
-    res.status(500).json({ error: 'Failed to fetch likes' });
+    return res.status(500).json({ error: 'Failed to fetch likes' });
   }
 };

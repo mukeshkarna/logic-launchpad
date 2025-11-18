@@ -41,7 +41,7 @@ export const getAllReports = async (req: AuthRequest, res: Response) => {
       prisma.userReport.count({ where })
     ]);
 
-    res.json({
+    return res.json({
       reports,
       pagination: {
         page,
@@ -52,7 +52,7 @@ export const getAllReports = async (req: AuthRequest, res: Response) => {
     });
   } catch (error) {
     console.error('Get reports error:', error);
-    res.status(500).json({ error: 'Failed to fetch reports' });
+    return res.status(500).json({ error: 'Failed to fetch reports' });
   }
 };
 
@@ -82,10 +82,10 @@ export const resolveReport = async (req: AuthRequest, res: Response) => {
       resolution
     );
 
-    res.json({ report, message: 'Report resolved successfully' });
+    return res.json({ report, message: 'Report resolved successfully' });
   } catch (error) {
     console.error('Resolve report error:', error);
-    res.status(500).json({ error: 'Failed to resolve report' });
+    return res.status(500).json({ error: 'Failed to resolve report' });
   }
 };
 
@@ -111,10 +111,10 @@ export const dismissReport = async (req: AuthRequest, res: Response) => {
       reason
     );
 
-    res.json({ report, message: 'Report dismissed successfully' });
+    return res.json({ report, message: 'Report dismissed successfully' });
   } catch (error) {
     console.error('Dismiss report error:', error);
-    res.status(500).json({ error: 'Failed to dismiss report' });
+    return res.status(500).json({ error: 'Failed to dismiss report' });
   }
 };
 
@@ -153,10 +153,10 @@ export const createReport = async (req: AuthRequest, res: Response) => {
       });
     }
 
-    res.status(201).json({ report, message: 'Report created successfully' });
+    return res.status(201).json({ report, message: 'Report created successfully' });
   } catch (error) {
     console.error('Create report error:', error);
-    res.status(500).json({ error: 'Failed to create report' });
+    return res.status(500).json({ error: 'Failed to create report' });
   }
 };
 
@@ -190,10 +190,10 @@ export const addModerationNote = async (req: AuthRequest, res: Response) => {
       note
     );
 
-    res.status(201).json({ moderationNote, message: 'Moderation note added successfully' });
+    return res.status(201).json({ moderationNote, message: 'Moderation note added successfully' });
   } catch (error) {
     console.error('Add moderation note error:', error);
-    res.status(500).json({ error: 'Failed to add moderation note' });
+    return res.status(500).json({ error: 'Failed to add moderation note' });
   }
 };
 
@@ -214,10 +214,10 @@ export const getModerationNotes = async (req: AuthRequest, res: Response) => {
       orderBy: { createdAt: 'desc' }
     });
 
-    res.json({ notes });
+    return res.json({ notes });
   } catch (error) {
     console.error('Get moderation notes error:', error);
-    res.status(500).json({ error: 'Failed to fetch moderation notes' });
+    return res.status(500).json({ error: 'Failed to fetch moderation notes' });
   }
 };
 
@@ -239,10 +239,10 @@ export const getPlatformSettings = async (req: AuthRequest, res: Response) => {
       }
     });
 
-    res.json({ settings: settingsObj, rawSettings: settings });
+    return res.json({ settings: settingsObj, rawSettings: settings });
   } catch (error) {
     console.error('Get platform settings error:', error);
-    res.status(500).json({ error: 'Failed to fetch platform settings' });
+    return res.status(500).json({ error: 'Failed to fetch platform settings' });
   }
 };
 
@@ -266,10 +266,10 @@ export const updatePlatformSetting = async (req: AuthRequest, res: Response) => 
       `Updated ${key} to ${valueStr}`
     );
 
-    res.json({ setting, message: 'Setting updated successfully' });
+    return res.json({ setting, message: 'Setting updated successfully' });
   } catch (error) {
     console.error('Update platform setting error:', error);
-    res.status(500).json({ error: 'Failed to update setting' });
+    return res.status(500).json({ error: 'Failed to update setting' });
   }
 };
 
@@ -289,10 +289,10 @@ export const deletePlatformSetting = async (req: AuthRequest, res: Response) => 
       `Deleted setting: ${key}`
     );
 
-    res.json({ message: 'Setting deleted successfully' });
+    return res.json({ message: 'Setting deleted successfully' });
   } catch (error) {
     console.error('Delete platform setting error:', error);
-    res.status(500).json({ error: 'Failed to delete setting' });
+    return res.status(500).json({ error: 'Failed to delete setting' });
   }
 };
 
@@ -326,7 +326,7 @@ export const getAdminActions = async (req: AuthRequest, res: Response) => {
       prisma.adminAction.count({ where })
     ]);
 
-    res.json({
+    return res.json({
       actions,
       pagination: {
         page,
@@ -337,7 +337,7 @@ export const getAdminActions = async (req: AuthRequest, res: Response) => {
     });
   } catch (error) {
     console.error('Get admin actions error:', error);
-    res.status(500).json({ error: 'Failed to fetch admin actions' });
+    return res.status(500).json({ error: 'Failed to fetch admin actions' });
   }
 };
 
@@ -363,10 +363,10 @@ export const bulkDeleteBlogs = async (req: AuthRequest, res: Response) => {
       `Deleted ${result.count} blogs`
     );
 
-    res.json({ message: `${result.count} blogs deleted successfully`, count: result.count });
+    return res.json({ message: `${result.count} blogs deleted successfully`, count: result.count });
   } catch (error) {
     console.error('Bulk delete blogs error:', error);
-    res.status(500).json({ error: 'Failed to delete blogs' });
+    return res.status(500).json({ error: 'Failed to delete blogs' });
   }
 };
 
@@ -394,10 +394,10 @@ export const bulkUnpublishBlogs = async (req: AuthRequest, res: Response) => {
       `Unpublished ${result.count} blogs`
     );
 
-    res.json({ message: `${result.count} blogs unpublished successfully`, count: result.count });
+    return res.json({ message: `${result.count} blogs unpublished successfully`, count: result.count });
   } catch (error) {
     console.error('Bulk unpublish blogs error:', error);
-    res.status(500).json({ error: 'Failed to unpublish blogs' });
+    return res.status(500).json({ error: 'Failed to unpublish blogs' });
   }
 };
 
@@ -422,12 +422,12 @@ export const bulkFeatureBlogs = async (req: AuthRequest, res: Response) => {
       `${isFeatured ? 'Featured' : 'Unfeatured'} ${result.count} blogs`
     );
 
-    res.json({
+    return res.json({
       message: `${result.count} blogs ${isFeatured ? 'featured' : 'unfeatured'} successfully`,
       count: result.count
     });
   } catch (error) {
     console.error('Bulk feature blogs error:', error);
-    res.status(500).json({ error: 'Failed to update blogs' });
+    return res.status(500).json({ error: 'Failed to update blogs' });
   }
 };

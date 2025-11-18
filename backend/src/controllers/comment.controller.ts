@@ -59,10 +59,10 @@ export const createComment = async (req: AuthRequest, res: Response) => {
       }
     });
 
-    res.status(201).json({ comment });
+    return res.status(201).json({ comment });
   } catch (error) {
     console.error('Create comment error:', error);
-    res.status(500).json({ error: 'Failed to create comment' });
+    return res.status(500).json({ error: 'Failed to create comment' });
   }
 };
 
@@ -105,10 +105,10 @@ export const updateComment = async (req: AuthRequest, res: Response) => {
       }
     });
 
-    res.json({ comment: updatedComment });
+    return res.json({ comment: updatedComment });
   } catch (error) {
     console.error('Update comment error:', error);
-    res.status(500).json({ error: 'Failed to update comment' });
+    return res.status(500).json({ error: 'Failed to update comment' });
   }
 };
 
@@ -134,10 +134,10 @@ export const deleteComment = async (req: AuthRequest, res: Response) => {
       where: { id }
     });
 
-    res.json({ message: 'Comment deleted successfully' });
+    return res.json({ message: 'Comment deleted successfully' });
   } catch (error) {
     console.error('Delete comment error:', error);
-    res.status(500).json({ error: 'Failed to delete comment' });
+    return res.status(500).json({ error: 'Failed to delete comment' });
   }
 };
 
@@ -189,9 +189,9 @@ export const getBlogComments = async (req: AuthRequest, res: Response) => {
       orderBy: { createdAt: 'desc' }
     });
 
-    res.json({ comments });
+    return res.json({ comments });
   } catch (error) {
     console.error('Get blog comments error:', error);
-    res.status(500).json({ error: 'Failed to fetch comments' });
+    return res.status(500).json({ error: 'Failed to fetch comments' });
   }
 };

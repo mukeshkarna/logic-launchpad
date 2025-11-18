@@ -55,13 +55,13 @@ export const uploadImage = async (req: AuthRequest, res: Response) => {
 
     const imageUrl = `/uploads/${req.file.filename}`;
 
-    res.json({
+    return res.json({
       message: 'Image uploaded successfully',
       url: imageUrl,
       filename: req.file.filename,
     });
   } catch (error) {
     console.error('Upload image error:', error);
-    res.status(500).json({ error: 'Failed to upload image' });
+    return res.status(500).json({ error: 'Failed to upload image' });
   }
 };

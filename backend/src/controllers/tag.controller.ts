@@ -15,10 +15,10 @@ export const getTags = async (req: Request, res: Response) => {
       orderBy: { name: 'asc' }
     });
 
-    res.json({ tags });
+    return res.json({ tags });
   } catch (error) {
     console.error('Get tags error:', error);
-    res.status(500).json({ error: 'Failed to fetch tags' });
+    return res.status(500).json({ error: 'Failed to fetch tags' });
   }
 };
 
@@ -41,9 +41,9 @@ export const getPopularTags = async (req: Request, res: Response) => {
       take: limit
     });
 
-    res.json({ tags });
+    return res.json({ tags });
   } catch (error) {
     console.error('Get popular tags error:', error);
-    res.status(500).json({ error: 'Failed to fetch popular tags' });
+    return res.status(500).json({ error: 'Failed to fetch popular tags' });
   }
 };

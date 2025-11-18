@@ -12,10 +12,10 @@ const prisma = new PrismaClient();
 export const getDashboardStats = async (req: AuthRequest, res: Response) => {
   try {
     const stats = await AdminAnalyticsService.getPlatformStats();
-    res.json(stats);
+    return res.json(stats);
   } catch (error) {
     console.error('Get dashboard stats error:', error);
-    res.status(500).json({ error: 'Failed to fetch dashboard stats' });
+    return res.status(500).json({ error: 'Failed to fetch dashboard stats' });
   }
 };
 
@@ -23,10 +23,10 @@ export const getRegistrationTrend = async (req: AuthRequest, res: Response) => {
   try {
     const days = parseInt(req.query.days as string) || 30;
     const trend = await AdminAnalyticsService.getUserRegistrationTrend(days);
-    res.json({ trend });
+    return res.json({ trend });
   } catch (error) {
     console.error('Get registration trend error:', error);
-    res.status(500).json({ error: 'Failed to fetch registration trend' });
+    return res.status(500).json({ error: 'Failed to fetch registration trend' });
   }
 };
 
@@ -34,10 +34,10 @@ export const getPublicationTrend = async (req: AuthRequest, res: Response) => {
   try {
     const days = parseInt(req.query.days as string) || 30;
     const trend = await AdminAnalyticsService.getBlogPublicationTrend(days);
-    res.json({ trend });
+    return res.json({ trend });
   } catch (error) {
     console.error('Get publication trend error:', error);
-    res.status(500).json({ error: 'Failed to fetch publication trend' });
+    return res.status(500).json({ error: 'Failed to fetch publication trend' });
   }
 };
 
@@ -45,10 +45,10 @@ export const getEngagementTrend = async (req: AuthRequest, res: Response) => {
   try {
     const days = parseInt(req.query.days as string) || 30;
     const trend = await AdminAnalyticsService.getEngagementTrend(days);
-    res.json({ trend });
+    return res.json({ trend });
   } catch (error) {
     console.error('Get engagement trend error:', error);
-    res.status(500).json({ error: 'Failed to fetch engagement trend' });
+    return res.status(500).json({ error: 'Failed to fetch engagement trend' });
   }
 };
 
@@ -61,10 +61,10 @@ export const getTopBloggers = async (req: AuthRequest, res: Response) => {
     const days = req.query.days ? parseInt(req.query.days as string) : undefined;
 
     const topBloggers = await AdminAnalyticsService.getTopBloggers(metric, limit, days);
-    res.json({ topBloggers, metric });
+    return res.json({ topBloggers, metric });
   } catch (error) {
     console.error('Get top bloggers error:', error);
-    res.status(500).json({ error: 'Failed to fetch top bloggers' });
+    return res.status(500).json({ error: 'Failed to fetch top bloggers' });
   }
 };
 
@@ -75,10 +75,10 @@ export const getTopBlogs = async (req: AuthRequest, res: Response) => {
     const days = req.query.days ? parseInt(req.query.days as string) : undefined;
 
     const topBlogs = await AdminAnalyticsService.getTopBlogs(metric, limit, days);
-    res.json({ topBlogs, metric });
+    return res.json({ topBlogs, metric });
   } catch (error) {
     console.error('Get top blogs error:', error);
-    res.status(500).json({ error: 'Failed to fetch top blogs' });
+    return res.status(500).json({ error: 'Failed to fetch top blogs' });
   }
 };
 
@@ -86,10 +86,10 @@ export const getRisingStars = async (req: AuthRequest, res: Response) => {
   try {
     const limit = parseInt(req.query.limit as string) || 10;
     const risingStars = await AdminAnalyticsService.getRisingStars(limit);
-    res.json({ risingStars });
+    return res.json({ risingStars });
   } catch (error) {
     console.error('Get rising stars error:', error);
-    res.status(500).json({ error: 'Failed to fetch rising stars' });
+    return res.status(500).json({ error: 'Failed to fetch rising stars' });
   }
 };
 
@@ -152,7 +152,7 @@ export const getAllUsers = async (req: AuthRequest, res: Response) => {
       prisma.user.count({ where })
     ]);
 
-    res.json({
+    return res.json({
       users,
       pagination: {
         page,
@@ -163,7 +163,7 @@ export const getAllUsers = async (req: AuthRequest, res: Response) => {
     });
   } catch (error) {
     console.error('Get all users error:', error);
-    res.status(500).json({ error: 'Failed to fetch users' });
+    return res.status(500).json({ error: 'Failed to fetch users' });
   }
 };
 
@@ -214,7 +214,7 @@ export const getUserDetails = async (req: AuthRequest, res: Response) => {
     const avgViewsPerBlog = user._count.blogs > 0 ? totalViews / user._count.blogs : 0;
     const engagementRate = totalViews > 0 ? ((totalLikes + totalComments) / totalViews) * 100 : 0;
 
-    res.json({
+    return res.json({
       user: {
         ...user,
         password: undefined, // Don't send password
@@ -230,7 +230,7 @@ export const getUserDetails = async (req: AuthRequest, res: Response) => {
     });
   } catch (error) {
     console.error('Get user details error:', error);
-    res.status(500).json({ error: 'Failed to fetch user details' });
+    return res.status(500).json({ error: 'Failed to fetch user details' });
   }
 };
 
@@ -263,10 +263,10 @@ export const updateUserRole = async (req: AuthRequest, res: Response) => {
       `Role changed to ${role}`
     );
 
-    res.json({ user, message: 'User role updated successfully' });
+    return res.json({ user, message: 'User role updated successfully' });
   } catch (error) {
     console.error('Update user role error:', error);
-    res.status(500).json({ error: 'Failed to update user role' });
+    return res.status(500).json({ error: 'Failed to update user role' });
   }
 };
 
@@ -292,10 +292,10 @@ export const suspendUser = async (req: AuthRequest, res: Response) => {
       reason
     );
 
-    res.json({ user, message: 'User suspended successfully' });
+    return res.json({ user, message: 'User suspended successfully' });
   } catch (error) {
     console.error('Suspend user error:', error);
-    res.status(500).json({ error: 'Failed to suspend user' });
+    return res.status(500).json({ error: 'Failed to suspend user' });
   }
 };
 
@@ -321,10 +321,10 @@ export const banUser = async (req: AuthRequest, res: Response) => {
       reason
     );
 
-    res.json({ user, message: 'User banned successfully' });
+    return res.json({ user, message: 'User banned successfully' });
   } catch (error) {
     console.error('Ban user error:', error);
-    res.status(500).json({ error: 'Failed to ban user' });
+    return res.status(500).json({ error: 'Failed to ban user' });
   }
 };
 
@@ -348,10 +348,10 @@ export const reinstateUser = async (req: AuthRequest, res: Response) => {
       userId
     );
 
-    res.json({ user, message: 'User reinstated successfully' });
+    return res.json({ user, message: 'User reinstated successfully' });
   } catch (error) {
     console.error('Reinstate user error:', error);
-    res.status(500).json({ error: 'Failed to reinstate user' });
+    return res.status(500).json({ error: 'Failed to reinstate user' });
   }
 };
 
@@ -377,10 +377,10 @@ export const deleteUser = async (req: AuthRequest, res: Response) => {
       `Deleted user: ${user?.username} (${user?.email})`
     );
 
-    res.json({ message: 'User deleted successfully' });
+    return res.json({ message: 'User deleted successfully' });
   } catch (error) {
     console.error('Delete user error:', error);
-    res.status(500).json({ error: 'Failed to delete user' });
+    return res.status(500).json({ error: 'Failed to delete user' });
   }
 };
 
@@ -438,7 +438,7 @@ export const getAllBlogs = async (req: AuthRequest, res: Response) => {
       prisma.blog.count({ where })
     ]);
 
-    res.json({
+    return res.json({
       blogs,
       pagination: {
         page,
@@ -449,7 +449,7 @@ export const getAllBlogs = async (req: AuthRequest, res: Response) => {
     });
   } catch (error) {
     console.error('Get all blogs error:', error);
-    res.status(500).json({ error: 'Failed to fetch blogs' });
+    return res.status(500).json({ error: 'Failed to fetch blogs' });
   }
 };
 
@@ -482,10 +482,10 @@ export const adminUpdateBlog = async (req: AuthRequest, res: Response) => {
       `Updated blog: ${blog.title}`
     );
 
-    res.json({ blog, message: 'Blog updated successfully' });
+    return res.json({ blog, message: 'Blog updated successfully' });
   } catch (error) {
     console.error('Admin update blog error:', error);
-    res.status(500).json({ error: 'Failed to update blog' });
+    return res.status(500).json({ error: 'Failed to update blog' });
   }
 };
 
@@ -510,10 +510,10 @@ export const adminDeleteBlog = async (req: AuthRequest, res: Response) => {
       `Deleted blog: ${blog?.title}`
     );
 
-    res.json({ message: 'Blog deleted successfully' });
+    return res.json({ message: 'Blog deleted successfully' });
   } catch (error) {
     console.error('Admin delete blog error:', error);
-    res.status(500).json({ error: 'Failed to delete blog' });
+    return res.status(500).json({ error: 'Failed to delete blog' });
   }
 };
 
@@ -538,10 +538,10 @@ export const toggleFeatureBlog = async (req: AuthRequest, res: Response) => {
       blogId
     );
 
-    res.json({ blog, message: `Blog ${blog.isFeatured ? 'featured' : 'unfeatured'} successfully` });
+    return res.json({ blog, message: `Blog ${blog.isFeatured ? 'featured' : 'unfeatured'} successfully` });
   } catch (error) {
     console.error('Toggle feature blog error:', error);
-    res.status(500).json({ error: 'Failed to toggle feature status' });
+    return res.status(500).json({ error: 'Failed to toggle feature status' });
   }
 };
 

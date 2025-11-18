@@ -109,7 +109,7 @@ export default function BlogPage() {
 
       {/* Author Info */}
       <div className="flex items-center gap-4 mb-8 pb-8 border-b">
-        <Link href={`/@${blog.author.username}`}>
+        <Link href={`/${blog.author.username}`}>
           {blog.author.avatar ? (
             <Image
               src={`${API_URL}${blog.author.avatar}`}
@@ -125,7 +125,7 @@ export default function BlogPage() {
           )}
         </Link>
         <div className="flex-1">
-          <Link href={`/@${blog.author.username}`} className="font-semibold hover:underline">
+          <Link href={`/${blog.author.username}`} className="font-semibold hover:underline">
             {blog.author.fullName}
           </Link>
           <div className="text-sm text-gray-500">

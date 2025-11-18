@@ -9,7 +9,7 @@ import toast from 'react-hot-toast';
 
 export default function UserProfilePage() {
   const params = useParams();
-  const username = (params.username as string).replace('@', '');
+  const username = (params.username as string);
 
   const [user, setUser] = useState<any>(null);
   const [blogs, setBlogs] = useState<any[]>([]);

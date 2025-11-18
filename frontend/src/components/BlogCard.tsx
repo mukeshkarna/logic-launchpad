@@ -10,7 +10,7 @@ export default function BlogCard({ blog }: BlogCardProps) {
 
   return (
     <article className="border-b border-gray-200 pb-8">
-      <Link href={`/@${blog.author.username}`} className="flex items-center gap-2 mb-4">
+      <Link href={`/${blog.author.username}`} className="flex items-center gap-2 mb-4">
         {blog.author.avatar ? (
           <Image
             src={`${API_URL}${blog.author.avatar}`}

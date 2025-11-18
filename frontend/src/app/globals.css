@@ -69,15 +69,22 @@
   }
 
   .ProseMirror table {
-    @apply border-collapse table-auto w-full my-4;
+    @apply border-collapse table-auto w-full my-6;
+    border: 2px solid #d1d5db;
   }
 
   .ProseMirror th {
-    @apply border border-gray-300 px-4 py-2 bg-gray-100 font-bold text-left;
+    @apply px-4 py-3 bg-gray-100 font-bold text-left min-w-[100px];
+    border: 2px solid #9ca3af;
   }
 
   .ProseMirror td {
-    @apply border border-gray-300 px-4 py-2;
+    @apply px-4 py-3 min-w-[100px];
+    border: 2px solid #d1d5db;
+  }
+
+  .ProseMirror table p {
+    @apply mb-0;
   }
 
   .ProseMirror a {
@@ -97,12 +104,25 @@
     @apply bg-primary-100 text-primary-700;
   }
 
-  /* Floating Menu */
-  .floating-menu {
-    @apply flex gap-1 bg-white shadow-lg rounded-lg p-1 border border-gray-200;
+  /* Bubble Menu */
+  .bubble-menu {
+    @apply flex gap-1 bg-white shadow-xl rounded-lg p-2 border border-gray-200;
   }
 
-  .floating-menu button {
-    @apply px-2 py-1 rounded hover:bg-gray-100 transition-colors;
+  .bubble-menu button {
+    @apply px-3 py-2 rounded hover:bg-gray-100 transition-colors text-sm font-medium;
+  }
+
+  .bubble-menu button.is-active {
+    @apply bg-primary-100 text-primary-700;
+  }
+
+  /* Slash Command Menu */
+  .slash-menu-item {
+    @apply w-full flex items-start gap-3 px-3 py-2.5 text-left hover:bg-gray-100 rounded transition-colors;
+  }
+
+  .slash-menu-item:hover {
+    @apply bg-primary-50;
   }
 }

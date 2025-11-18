@@ -9,7 +9,7 @@ export default function BlogCard({ blog }: BlogCardProps) {
   const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
 
   return (
-    <article className="border-b border-gray-200 pb-8">
+    <article className="border-b border-gray-200 dark:border-gray-700 pb-8">
       <Link href={`/${blog.author.username}`} className="flex items-center gap-2 mb-4">
         {blog.author.avatar ? (
           <Image
@@ -20,13 +20,13 @@ export default function BlogCard({ blog }: BlogCardProps) {
             className="rounded-full"
           />
         ) : (
-          <div className="w-8 h-8 rounded-full bg-primary-600 text-white flex items-center justify-center font-semibold">
+          <div className="w-8 h-8 rounded-full bg-primary-600 dark:bg-primary-500 text-white flex items-center justify-center font-semibold">
             {blog.author.fullName.charAt(0)}
           </div>
         )}
         <div>
-          <p className="font-medium text-sm">{blog.author.fullName}</p>
-          <p className="text-xs text-gray-500">
+          <p className="font-medium text-sm dark:text-gray-200">{blog.author.fullName}</p>
+          <p className="text-xs text-gray-500 dark:text-gray-400">
             {new Date(blog.publishedAt).toLocaleDateString('en-US', {
               month: 'short',
               day: 'numeric',
@@ -39,13 +39,13 @@ export default function BlogCard({ blog }: BlogCardProps) {
       <Link href={`/blog/${blog.slug}`}>
         <div className="flex gap-6">
           <div className="flex-1">
-            <h2 className="text-2xl font-bold mb-2 hover:text-primary-600 transition-colors">
+            <h2 className="text-2xl font-bold mb-2 dark:text-gray-100 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
               {blog.title}
             </h2>
             {blog.excerpt && (
-              <p className="text-gray-600 mb-4 line-clamp-3">{blog.excerpt}</p>
+              <p className="text-gray-600 dark:text-gray-400 mb-4 line-clamp-3">{blog.excerpt}</p>
             )}
-            <div className="flex items-center gap-4 text-sm text-gray-500">
+            <div className="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400">
               <span className="flex items-center gap-1">
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />

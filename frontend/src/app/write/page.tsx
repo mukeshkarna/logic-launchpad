@@ -119,10 +119,10 @@ export default function WritePage() {
 
   if (isLoading || loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-white dark:bg-gray-900">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Loading...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 dark:border-primary-500 mx-auto"></div>
+          <p className="mt-4 text-gray-600 dark:text-gray-400">Loading...</p>
         </div>
       </div>
     );
@@ -138,7 +138,7 @@ export default function WritePage() {
       <div className="flex justify-between items-center mb-8">
         <button
           onClick={() => router.back()}
-          className="text-gray-600 hover:text-gray-900"
+          className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100"
         >
           ← Back
         </button>
@@ -146,14 +146,14 @@ export default function WritePage() {
           <button
             onClick={handleSaveDraft}
             disabled={loading}
-            className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50"
+            className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 disabled:opacity-50"
           >
             Save Draft
           </button>
           <button
             onClick={handlePublish}
             disabled={loading}
-            className="px-6 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 disabled:opacity-50"
+            className="px-6 py-2 bg-primary-600 dark:bg-primary-500 text-white rounded-lg hover:bg-primary-700 dark:hover:bg-primary-600 disabled:opacity-50"
           >
             {isPublished ? 'Update & Publish' : 'Publish'}
           </button>
@@ -162,7 +162,7 @@ export default function WritePage() {
 
       {/* Cover Image */}
       <div className="mb-6">
-        <label className="block text-sm font-medium text-gray-700 mb-2">
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
           Cover Image (Optional)
         </label>
         <div className="flex gap-4 items-center">
@@ -170,14 +170,14 @@ export default function WritePage() {
             <img
               src={`${process.env.NEXT_PUBLIC_API_URL}${coverImage}`}
               alt="Cover"
-              className="w-32 h-32 object-cover rounded"
+              className="w-32 h-32 object-cover rounded border border-gray-200 dark:border-gray-700"
             />
           )}
           <input
             type="file"
             accept="image/*"
             onChange={handleCoverImageUpload}
-            className="text-sm"
+            className="text-sm text-gray-700 dark:text-gray-300"
           />
         </div>
       </div>
@@ -188,7 +188,7 @@ export default function WritePage() {
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         placeholder="Title"
-        className="w-full text-4xl font-bold border-none outline-none mb-4 placeholder-gray-300"
+        className="w-full text-4xl font-bold border-none outline-none mb-4 bg-transparent text-gray-900 dark:text-gray-100 placeholder-gray-300 dark:placeholder-gray-600"
       />
 
       {/* Excerpt */}
@@ -196,7 +196,7 @@ export default function WritePage() {
         value={excerpt}
         onChange={(e) => setExcerpt(e.target.value)}
         placeholder="Write a brief excerpt (optional)..."
-        className="w-full text-lg border border-gray-200 rounded-lg p-4 mb-6 resize-none"
+        className="w-full text-lg border border-gray-200 dark:border-gray-700 rounded-lg p-4 mb-6 resize-none bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500"
         rows={2}
       />
 

@@ -94,8 +94,8 @@ export default function BlogPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
+      <div className="min-h-screen flex items-center justify-center bg-white dark:bg-gray-900">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 dark:border-primary-500"></div>
       </div>
     );
   }
@@ -105,10 +105,10 @@ export default function BlogPage() {
   return (
     <article className="max-w-3xl mx-auto px-4 py-12">
       {/* Title */}
-      <h1 className="text-5xl font-bold mb-6">{blog.title}</h1>
+      <h1 className="text-5xl font-bold mb-6 text-gray-900 dark:text-gray-100">{blog.title}</h1>
 
       {/* Author Info */}
-      <div className="flex items-center gap-4 mb-8 pb-8 border-b">
+      <div className="flex items-center gap-4 mb-8 pb-8 border-b border-gray-200 dark:border-gray-700">
         <Link href={`/${blog.author.username}`}>
           {blog.author.avatar ? (
             <Image
@@ -119,16 +119,16 @@ export default function BlogPage() {
               className="rounded-full"
             />
           ) : (
-            <div className="w-12 h-12 rounded-full bg-primary-600 text-white flex items-center justify-center font-semibold text-lg">
+            <div className="w-12 h-12 rounded-full bg-primary-600 dark:bg-primary-500 text-white flex items-center justify-center font-semibold text-lg">
               {blog.author.fullName.charAt(0)}
             </div>
           )}
         </Link>
         <div className="flex-1">
-          <Link href={`/${blog.author.username}`} className="font-semibold hover:underline">
+          <Link href={`/${blog.author.username}`} className="font-semibold text-gray-900 dark:text-gray-100 hover:underline">
             {blog.author.fullName}
           </Link>
-          <div className="text-sm text-gray-500">
+          <div className="text-sm text-gray-500 dark:text-gray-400">
             {new Date(blog.publishedAt).toLocaleDateString('en-US', {
               month: 'long',
               day: 'numeric',
@@ -136,7 +136,7 @@ export default function BlogPage() {
             })}
           </div>
         </div>
-        <div className="flex gap-4 text-sm text-gray-500">
+        <div className="flex gap-4 text-sm text-gray-500 dark:text-gray-400">
           <span>{blog._count.views} views</span>
           <span>{blog._count.likes} likes</span>
           <span>{blog._count.comments} comments</span>
@@ -158,18 +158,18 @@ export default function BlogPage() {
 
       {/* Content */}
       <div
-        className="prose max-w-none mb-12"
+        className="prose dark:prose-invert max-w-none mb-12"
         dangerouslySetInnerHTML={{ __html: blog.content }}
       />
 
       {/* Actions */}
-      <div className="flex gap-4 py-6 border-t border-b mb-12">
+      <div className="flex gap-4 py-6 border-t border-b border-gray-200 dark:border-gray-700 mb-12">
         <button
           onClick={handleLike}
           className={`flex items-center gap-2 px-4 py-2 rounded-full transition-colors ${
             isLiked
-              ? 'bg-red-100 text-red-600'
-              : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              ? 'bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400'
+              : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
           }`}
         >
           <svg className="w-5 h-5" fill={isLiked ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24">
@@ -181,7 +181,7 @@ export default function BlogPage() {
 
       {/* Comments Section */}
       <div className="mb-12">
-        <h2 className="text-2xl font-bold mb-6">
+        <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-gray-100">
           Comments ({comments.length})
         </h2>
 
@@ -192,20 +192,20 @@ export default function BlogPage() {
               value={commentContent}
               onChange={(e) => setCommentContent(e.target.value)}
               placeholder="Share your thoughts..."
-              className="w-full border border-gray-300 rounded-lg p-4 mb-3 resize-none focus:outline-none focus:ring-2 focus:ring-primary-500"
+              className="w-full border border-gray-300 dark:border-gray-600 rounded-lg p-4 mb-3 resize-none bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400"
               rows={3}
             />
             <button
               type="submit"
-              className="px-6 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700"
+              className="px-6 py-2 bg-primary-600 dark:bg-primary-500 text-white rounded-lg hover:bg-primary-700 dark:hover:bg-primary-600"
             >
               Post Comment
             </button>
           </form>
         ) : (
-          <div className="mb-8 p-4 bg-gray-50 rounded-lg text-center">
-            <p className="text-gray-600">
-              <Link href="/login" className="text-primary-600 hover:underline">
+          <div className="mb-8 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg text-center border border-gray-200 dark:border-gray-700">
+            <p className="text-gray-600 dark:text-gray-400">
+              <Link href="/login" className="text-primary-600 dark:text-primary-400 hover:underline">
                 Sign in
               </Link>{' '}
               to comment on this blog
@@ -216,27 +216,27 @@ export default function BlogPage() {
         {/* Comments List */}
         <div className="space-y-6">
           {comments.map((comment) => (
-            <div key={comment.id} className="border-l-2 border-gray-200 pl-4">
+            <div key={comment.id} className="border-l-2 border-gray-200 dark:border-gray-700 pl-4">
               <div className="flex items-center gap-2 mb-2">
-                <span className="font-semibold">{comment.author.fullName}</span>
-                <span className="text-sm text-gray-500">
+                <span className="font-semibold text-gray-900 dark:text-gray-100">{comment.author.fullName}</span>
+                <span className="text-sm text-gray-500 dark:text-gray-400">
                   {new Date(comment.createdAt).toLocaleDateString()}
                 </span>
               </div>
-              <p className="text-gray-700">{comment.content}</p>
+              <p className="text-gray-700 dark:text-gray-300">{comment.content}</p>
 
               {/* Replies */}
               {comment.replies && comment.replies.length > 0 && (
                 <div className="ml-6 mt-4 space-y-4">
                   {comment.replies.map((reply: any) => (
-                    <div key={reply.id} className="border-l-2 border-gray-100 pl-4">
+                    <div key={reply.id} className="border-l-2 border-gray-100 dark:border-gray-700 pl-4">
                       <div className="flex items-center gap-2 mb-2">
-                        <span className="font-semibold text-sm">{reply.author.fullName}</span>
-                        <span className="text-xs text-gray-500">
+                        <span className="font-semibold text-sm text-gray-900 dark:text-gray-100">{reply.author.fullName}</span>
+                        <span className="text-xs text-gray-500 dark:text-gray-400">
                           {new Date(reply.createdAt).toLocaleDateString()}
                         </span>
                       </div>
-                      <p className="text-gray-700 text-sm">{reply.content}</p>
+                      <p className="text-gray-700 dark:text-gray-300 text-sm">{reply.content}</p>
                     </div>
                   ))}
                 </div>

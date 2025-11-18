@@ -35,13 +35,12 @@ export default function Navbar() {
                 <Image
                   src={currentLogo}
                   alt={siteName}
-                  width={32}
-                  height={32}
-                  className="rounded"
+                  width={150}
+                  height={150}
                 />
-                <span className="text-xl font-bold text-primary-600 dark:text-primary-400">
+                {/* <span className="text-xl font-bold text-primary-600 dark:text-primary-400">
                   {siteName}
-                </span>
+                </span> */}
               </>
             ) : (
               <span className="text-2xl font-bold text-primary-600 dark:text-primary-400">

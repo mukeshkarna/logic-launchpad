@@ -60,6 +60,17 @@ export default function Navbar() {
                     >
                       Settings
                     </Link>
+                    {(user?.role === 'SUPER_ADMIN' || user?.role === 'MODERATOR') && (
+                      <>
+                        <hr className="my-1" />
+                        <Link
+                          href="/admin"
+                          className="block px-4 py-2 text-purple-600 hover:bg-purple-50 font-medium"
+                        >
+                          Admin Dashboard
+                        </Link>
+                      </>
+                    )}
                     <hr className="my-1" />
                     <button
                       onClick={handleLogout}

@@ -1,4 +1,4 @@
-import { PrismaClient, UserRole, UserStatus } from '@prisma/client';
+import { PrismaClient, UserRole, UserStatus, BadgeType } from '@prisma/client';
 import bcrypt from 'bcrypt';
 
 const prisma = new PrismaClient();
@@ -88,70 +88,70 @@ async function main() {
   const badges = [
     {
       name: 'First Blog',
-      badgeType: 'FIRST_BLOG',
+      badgeType: BadgeType.FIRST_BLOG,
       description: 'Published your first blog post',
       icon: '📝',
       criteria: JSON.stringify({ minBlogs: 1 }),
     },
     {
       name: '1K Views',
-      badgeType: 'VIEWS_1K',
+      badgeType: BadgeType.VIEWS_1K,
       description: 'Reached 1,000 total views',
       icon: '👀',
       criteria: JSON.stringify({ minViews: 1000 }),
     },
     {
       name: '10K Views',
-      badgeType: 'VIEWS_10K',
+      badgeType: BadgeType.VIEWS_10K,
       description: 'Reached 10,000 total views',
       icon: '🔥',
       criteria: JSON.stringify({ minViews: 10000 }),
     },
     {
       name: '100K Views',
-      badgeType: 'VIEWS_100K',
+      badgeType: BadgeType.VIEWS_100K,
       description: 'Reached 100,000 total views',
       icon: '⭐',
       criteria: JSON.stringify({ minViews: 100000 }),
     },
     {
       name: '100 Likes',
-      badgeType: 'LIKES_100',
+      badgeType: BadgeType.LIKES_100,
       description: 'Received 100 likes on your blogs',
       icon: '❤️',
       criteria: JSON.stringify({ minLikes: 100 }),
     },
     {
       name: '1K Likes',
-      badgeType: 'LIKES_1K',
+      badgeType: BadgeType.LIKES_1K,
       description: 'Received 1,000 likes on your blogs',
       icon: '💖',
       criteria: JSON.stringify({ minLikes: 1000 }),
     },
     {
       name: 'Top Blogger',
-      badgeType: 'TOP_BLOGGER',
+      badgeType: BadgeType.TOP_BLOGGER,
       description: 'Featured in top 10 bloggers of the month',
       icon: '🏆',
       criteria: JSON.stringify({ topRank: 10, period: 'month' }),
     },
     {
       name: 'Consistent Publisher',
-      badgeType: 'CONSISTENT_PUBLISHER',
+      badgeType: BadgeType.CONSISTENT_PUBLISHER,
       description: 'Published at least one blog per week for a month',
       icon: '📅',
       criteria: JSON.stringify({ minBlogsPerWeek: 1, duration: 'month' }),
     },
     {
       name: 'Rising Star',
-      badgeType: 'RISING_STAR',
+      badgeType: BadgeType.RISING_STAR,
       description: 'New user with exceptional engagement',
       icon: '🌟',
       criteria: JSON.stringify({ accountAge: 30, minEngagement: 1000 }),
     },
     {
       name: 'One Year Anniversary',
-      badgeType: 'YEAR_ANNIVERSARY',
+      badgeType: BadgeType.YEAR_ANNIVERSARY,
       description: 'Been a member for one year',
       icon: '🎂',
       criteria: JSON.stringify({ accountAge: 365 }),
@@ -160,7 +160,7 @@ async function main() {
 
   for (const badge of badges) {
     await prisma.badge.upsert({
-      where: { badgeType: badge.badgeType as any },
+      where: { badgeType: badge.badgeType },
       update: {},
       create: badge,
     });

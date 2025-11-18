@@ -1,6 +1,5 @@
 import { Response } from 'express';
 import { PrismaClient, UserRole, UserStatus, BlogStatus } from '@prisma/client';
-import { validationResult } from 'express-validator';
 import { AuthRequest } from '../middleware/auth.middleware';
 import { AdminAnalyticsService } from '../services/admin-analytics.service';
 import { logAdminAction } from '../middleware/rbac.middleware';
@@ -9,7 +8,7 @@ const prisma = new PrismaClient();
 
 // ========== DASHBOARD & ANALYTICS ==========
 
-export const getDashboardStats = async (req: AuthRequest, res: Response) => {
+export const getDashboardStats = async (_req: AuthRequest, res: Response) => {
   try {
     const stats = await AdminAnalyticsService.getPlatformStats();
     return res.json(stats);

@@ -38,7 +38,7 @@ export const requireRole = (...allowedRoles: UserRole[]) => {
 
       // Attach role to request for further use
       req.user.role = user.role;
-      next();
+      return next();
     } catch (error) {
       console.error('RBAC error:', error);
       return res.status(500).json({ error: 'Permission check failed' });

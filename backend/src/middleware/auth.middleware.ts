@@ -46,7 +46,7 @@ export const authenticateToken = async (
     }
 
     req.user = user;
-    next();
+    return next();
   } catch (error) {
     console.error('Authentication error:', error);
     return res.status(403).json({ error: 'Invalid or expired token' });
@@ -56,7 +56,7 @@ export const authenticateToken = async (
 // Optional authentication middleware (doesn't fail if no token)
 export const optionalAuthentication = async (
   req: AuthRequest,
-  res: Response,
+  _res: Response,
   next: NextFunction
 ) => {
   try {

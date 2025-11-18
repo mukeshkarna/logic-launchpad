@@ -4,9 +4,9 @@ services:
     container_name: blog-postgres
     restart: unless-stopped
     environment:
-      POSTGRES_USER: ${POSTGRES_USER:-bloguser}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-blogpassword}
-      POSTGRES_DB: ${POSTGRES_DB:-blogdb}
+      POSTGRES_USER: bloguser
+      POSTGRES_PASSWORD: blogpassword
+      POSTGRES_DB: blogdb
     ports:
       - "5432:5432"
     volumes:
@@ -14,7 +14,7 @@ services:
     networks:
       - blog-network
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-bloguser}"]
+      test: ["CMD-SHELL", "pg_isready -U bloguser"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -60,6 +60,7 @@ services:
     volumes:
       - ./frontend:/app
       - /app/node_modules
+      # - /app/.next
     depends_on:
       - backend
     networks:

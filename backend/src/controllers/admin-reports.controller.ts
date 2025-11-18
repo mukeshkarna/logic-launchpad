@@ -223,7 +223,7 @@ export const getModerationNotes = async (req: AuthRequest, res: Response) => {
 
 // ========== PLATFORM SETTINGS ==========
 
-export const getPlatformSettings = async (req: AuthRequest, res: Response) => {
+export const getPlatformSettings = async (_req: AuthRequest, res: Response) => {
   try {
     const settings = await prisma.platformSettings.findMany({
       orderBy: { key: 'asc' }

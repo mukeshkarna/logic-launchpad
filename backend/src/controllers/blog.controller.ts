@@ -96,7 +96,7 @@ export const updateBlog = async (req: AuthRequest, res: Response) => {
     }
 
     const { id } = req.params;
-    const { title, content, excerpt, coverImage, tags } = req.body;
+    const { title, content, excerpt, coverImage } = req.body;
     const userId = req.user.id;
 
     // Check if blog exists and user is the author

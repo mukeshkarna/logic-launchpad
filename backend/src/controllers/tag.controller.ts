@@ -4,7 +4,7 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 // Get all tags
-export const getTags = async (req: Request, res: Response) => {
+export const getTags = async (_req: Request, res: Response) => {
   try {
     const tags = await prisma.tag.findMany({
       include: {

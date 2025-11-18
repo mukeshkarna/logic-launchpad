@@ -181,12 +181,12 @@ export class AdminAnalyticsService {
   }
 
   // Get top bloggers by various metrics
-  static async getTopBloggers(metric: 'views' | 'likes' | 'comments' | 'engagement', limit: number = 10, days?: number) {
-    const dateFilter = days ? {
-      createdAt: {
-        gte: new Date(Date.now() - days * 24 * 60 * 60 * 1000)
-      }
-    } : {};
+  static async getTopBloggers(metric: 'views' | 'likes' | 'comments' | 'engagement', limit: number = 10, _days?: number) {
+    // const dateFilter = days ? {
+    //   createdAt: {
+    //     gte: new Date(Date.now() - days * 24 * 60 * 60 * 1000)
+    //   }
+    // } : {};
 
     let users;
 

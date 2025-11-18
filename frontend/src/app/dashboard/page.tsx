@@ -75,8 +75,8 @@ export default function DashboardPage() {
 
   if (isLoading || loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
+      <div className="min-h-screen flex items-center justify-center bg-white dark:bg-gray-900">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 dark:border-primary-500"></div>
       </div>
     );
   }
@@ -87,22 +87,22 @@ export default function DashboardPage() {
     <div className="max-w-7xl mx-auto px-4 py-8">
       {/* Admin Dashboard Link */}
       {(user?.role === 'SUPER_ADMIN' || user?.role === 'MODERATOR') && (
-        <div className="mb-6 bg-gradient-to-r from-purple-50 to-blue-50 border border-purple-200 rounded-lg p-4">
+        <div className="mb-6 bg-gradient-to-r from-purple-50 to-blue-50 dark:from-purple-900/20 dark:to-blue-900/20 border border-purple-200 dark:border-purple-700 rounded-lg p-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="bg-purple-600 text-white p-2 rounded-lg">
+              <div className="bg-purple-600 dark:bg-purple-500 text-white p-2 rounded-lg">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                 </svg>
               </div>
               <div>
-                <h3 className="font-semibold text-gray-900">Admin Access</h3>
-                <p className="text-sm text-gray-600">Manage platform users, content, and settings</p>
+                <h3 className="font-semibold text-gray-900 dark:text-gray-100">Admin Access</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Manage platform users, content, and settings</p>
               </div>
             </div>
             <Link
               href="/admin"
-              className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors font-medium"
+              className="px-4 py-2 bg-purple-600 dark:bg-purple-500 text-white rounded-lg hover:bg-purple-700 dark:hover:bg-purple-600 transition-colors font-medium"
             >
               Go to Admin Dashboard →
             </Link>
@@ -112,28 +112,28 @@ export default function DashboardPage() {
 
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">Dashboard</h1>
-        <p className="text-gray-600">Welcome back, {user?.fullName}!</p>
+        <h1 className="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100">Dashboard</h1>
+        <p className="text-gray-600 dark:text-gray-400">Welcome back, {user?.fullName}!</p>
       </div>
 
       {/* Analytics */}
       {analytics && (
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          <div className="bg-white p-6 rounded-lg border border-gray-200">
-            <div className="text-sm text-gray-600 mb-1">Total Blogs</div>
-            <div className="text-3xl font-bold">{analytics.overview.totalBlogs}</div>
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
+            <div className="text-sm text-gray-600 dark:text-gray-400 mb-1">Total Blogs</div>
+            <div className="text-3xl font-bold text-gray-900 dark:text-gray-100">{analytics.overview.totalBlogs}</div>
           </div>
-          <div className="bg-white p-6 rounded-lg border border-gray-200">
-            <div className="text-sm text-gray-600 mb-1">Total Views</div>
-            <div className="text-3xl font-bold">{analytics.overview.totalViews}</div>
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
+            <div className="text-sm text-gray-600 dark:text-gray-400 mb-1">Total Views</div>
+            <div className="text-3xl font-bold text-gray-900 dark:text-gray-100">{analytics.overview.totalViews}</div>
           </div>
-          <div className="bg-white p-6 rounded-lg border border-gray-200">
-            <div className="text-sm text-gray-600 mb-1">Total Likes</div>
-            <div className="text-3xl font-bold">{analytics.overview.totalLikes}</div>
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
+            <div className="text-sm text-gray-600 dark:text-gray-400 mb-1">Total Likes</div>
+            <div className="text-3xl font-bold text-gray-900 dark:text-gray-100">{analytics.overview.totalLikes}</div>
           </div>
-          <div className="bg-white p-6 rounded-lg border border-gray-200">
-            <div className="text-sm text-gray-600 mb-1">Total Comments</div>
-            <div className="text-3xl font-bold">{analytics.overview.totalComments}</div>
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
+            <div className="text-sm text-gray-600 dark:text-gray-400 mb-1">Total Comments</div>
+            <div className="text-3xl font-bold text-gray-900 dark:text-gray-100">{analytics.overview.totalComments}</div>
           </div>
         </div>
       )}
@@ -145,8 +145,8 @@ export default function DashboardPage() {
             onClick={() => setActiveTab('all')}
             className={`px-4 py-2 rounded-lg ${
               activeTab === 'all'
-                ? 'bg-primary-600 text-white'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                ? 'bg-primary-600 dark:bg-primary-500 text-white'
+                : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
             }`}
           >
             All Blogs
@@ -155,8 +155,8 @@ export default function DashboardPage() {
             onClick={() => setActiveTab('published')}
             className={`px-4 py-2 rounded-lg ${
               activeTab === 'published'
-                ? 'bg-primary-600 text-white'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                ? 'bg-primary-600 dark:bg-primary-500 text-white'
+                : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
             }`}
           >
             Published
@@ -165,8 +165,8 @@ export default function DashboardPage() {
             onClick={() => setActiveTab('draft')}
             className={`px-4 py-2 rounded-lg ${
               activeTab === 'draft'
-                ? 'bg-primary-600 text-white'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                ? 'bg-primary-600 dark:bg-primary-500 text-white'
+                : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
             }`}
           >
             Drafts
@@ -174,38 +174,38 @@ export default function DashboardPage() {
         </div>
         <Link
           href="/write"
-          className="px-6 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700"
+          className="px-6 py-2 bg-primary-600 dark:bg-primary-500 text-white rounded-lg hover:bg-primary-700 dark:hover:bg-primary-600"
         >
           New Blog
         </Link>
       </div>
 
       {/* Blogs List */}
-      <div className="bg-white rounded-lg border border-gray-200">
+      <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
         {blogs.length === 0 ? (
           <div className="text-center py-12">
-            <p className="text-gray-500 mb-4">No blogs found</p>
-            <Link href="/write" className="text-primary-600 hover:underline">
+            <p className="text-gray-500 dark:text-gray-400 mb-4">No blogs found</p>
+            <Link href="/write" className="text-primary-600 dark:text-primary-400 hover:underline">
               Write your first blog →
             </Link>
           </div>
         ) : (
-          <div className="divide-y">
+          <div className="divide-y dark:divide-gray-700">
             {blogs.map((blog) => (
-              <div key={blog.id} className="p-6 hover:bg-gray-50">
+              <div key={blog.id} className="p-6 hover:bg-gray-50 dark:hover:bg-gray-700/50">
                 <div className="flex justify-between items-start">
                   <div className="flex-1">
                     <Link href={`/blog/${blog.slug}`}>
-                      <h3 className="text-xl font-bold mb-2 hover:text-primary-600">
+                      <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-gray-100 hover:text-primary-600 dark:hover:text-primary-400">
                         {blog.title}
                       </h3>
                     </Link>
-                    <div className="flex items-center gap-4 text-sm text-gray-600 mb-4">
+                    <div className="flex items-center gap-4 text-sm text-gray-600 dark:text-gray-400 mb-4">
                       <span
                         className={`px-2 py-1 rounded text-xs font-medium ${
                           blog.status === 'PUBLISHED'
-                            ? 'bg-green-100 text-green-700'
-                            : 'bg-yellow-100 text-yellow-700'
+                            ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400'
+                            : 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400'
                         }`}
                       >
                         {blog.status}
@@ -221,28 +221,28 @@ export default function DashboardPage() {
                   <div className="flex gap-2">
                     <Link
                       href={`/write?id=${blog.id}`}
-                      className="px-3 py-1 text-sm border border-gray-300 rounded hover:bg-gray-50"
+                      className="px-3 py-1 text-sm border border-gray-300 dark:border-gray-600 rounded hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300"
                     >
                       Edit
                     </Link>
                     {blog.status === 'DRAFT' ? (
                       <button
                         onClick={() => handlePublish(blog.id)}
-                        className="px-3 py-1 text-sm bg-primary-600 text-white rounded hover:bg-primary-700"
+                        className="px-3 py-1 text-sm bg-primary-600 dark:bg-primary-500 text-white rounded hover:bg-primary-700 dark:hover:bg-primary-600"
                       >
                         Publish
                       </button>
                     ) : (
                       <button
                         onClick={() => handleUnpublish(blog.id)}
-                        className="px-3 py-1 text-sm border border-gray-300 rounded hover:bg-gray-50"
+                        className="px-3 py-1 text-sm border border-gray-300 dark:border-gray-600 rounded hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300"
                       >
                         Unpublish
                       </button>
                     )}
                     <button
                       onClick={() => handleDelete(blog.id)}
-                      className="px-3 py-1 text-sm text-red-600 border border-red-300 rounded hover:bg-red-50"
+                      className="px-3 py-1 text-sm text-red-600 dark:text-red-400 border border-red-300 dark:border-red-800 rounded hover:bg-red-50 dark:hover:bg-red-900/20"
                     >
                       Delete
                     </button>

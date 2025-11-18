@@ -17,8 +17,12 @@ export default function Navbar() {
   };
 
   // Logo configuration - user can update this
-  const logoImagePath = '/logo.png'; // Update with your logo path
+  const logoLightMode = '/logo-light.png'; // Logo for light mode (dark colored logo)
+  const logoDarkMode = '/logo-dark.png';   // Logo for dark mode (light colored logo)
   const siteName = 'BlogHub'; // Update with your site name
+
+  // Determine which logo to use based on current theme
+  const currentLogo = theme === 'dark' ? logoDarkMode : logoLightMode;
 
   return (
     <nav className="border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 sticky top-0 z-50">
@@ -26,10 +30,10 @@ export default function Navbar() {
         <div className="flex justify-between items-center h-16">
           {/* Logo/Site Name */}
           <Link href="/" className="flex items-center gap-2">
-            {logoImagePath ? (
+            {(logoLightMode || logoDarkMode) ? (
               <>
                 <Image
-                  src={logoImagePath}
+                  src={currentLogo}
                   alt={siteName}
                   width={32}
                   height={32}

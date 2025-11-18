@@ -17,8 +17,8 @@ export default function Navbar() {
   };
 
   // Logo configuration - user can update this
-  const logoImagePath = null; // Set to '/logo.png' or your logo path when ready
-  const siteName = 'BlogHub';
+  const logoImagePath = '/logo.png'; // Update with your logo path
+  const siteName = 'BlogHub'; // Update with your site name
 
   return (
     <nav className="border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 sticky top-0 z-50">

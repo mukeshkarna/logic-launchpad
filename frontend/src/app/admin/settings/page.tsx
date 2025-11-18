@@ -277,7 +277,7 @@ export default function AdminSettingsPage() {
             </div>
           ) : (
             <div className="divide-y divide-gray-200">
-              {settings.map((setting) => (
+              {settings.length && settings?.map((setting) => (
                 <div key={setting.id} className="p-6">
                   {editingKey === setting.key ? (
                     /* Edit Mode */

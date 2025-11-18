@@ -28,6 +28,20 @@ A full-featured, production-ready blogging platform built with modern web techno
 - **Containerized**: Complete Docker setup
 - **Production Ready**: Environment-based configuration
 
+### Super Admin Features ⭐
+- **Comprehensive Dashboard**: Real-time platform statistics and trend analytics
+- **User Management**: Full CRUD operations, role management, suspend/ban/reinstate users
+- **Content Moderation**: Review, edit, feature, and manage all blog posts
+- **Leaderboards**: Track top bloggers, top blogs, and rising stars
+- **Reports & Moderation**: Handle user reports with workflow management
+- **Platform Settings**: Configure site-wide settings and parameters
+- **Audit Logs**: Complete action history for accountability
+- **Bulk Operations**: Manage multiple blogs at once
+- **Advanced Analytics**: User registration, publication, and engagement trends
+- **Badge System**: Achievements for user milestones
+
+👉 **[View Complete Admin Features Documentation](./ADMIN_FEATURES.md)**
+
 ## 🛠 Tech Stack
 
 ### Frontend
@@ -128,12 +142,21 @@ docker-compose exec backend sh
 # Run Prisma migrations
 npx prisma migrate dev
 
-# (Optional) Seed database with sample data
+# Seed database (creates super admin and default settings)
 npm run prisma:seed
 
 # Exit container
 exit
 ```
+
+**Super Admin Credentials (created by seed):**
+- Email: `admin@bloghub.com`
+- Username: `superadmin`
+- Password: `admin123456`
+
+⚠️ **Important**: Change the super admin password immediately after first login!
+
+**Access Admin Panel**: Navigate to `/admin` after logging in with super admin credentials.
 
 ## 💻 Local Development (Without Docker)
 

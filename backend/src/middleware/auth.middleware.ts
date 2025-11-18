@@ -36,6 +36,8 @@ export const authenticateToken = async (
         bio: true,
         avatar: true,
         createdAt: true,
+        role: true,
+        status: true,
       },
     });
 
@@ -75,6 +77,8 @@ export const optionalAuthentication = async (
           bio: true,
           avatar: true,
           createdAt: true,
+          role: true,
+          status: true,
         },
       });
 

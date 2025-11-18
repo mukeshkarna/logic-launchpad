@@ -14,6 +14,7 @@ import likeRoutes from './routes/like.routes';
 import uploadRoutes from './routes/upload.routes';
 import analyticsRoutes from './routes/analytics.routes';
 import tagRoutes from './routes/tag.routes';
+import adminRoutes from './routes/admin.routes';
 
 // Import passport configuration
 import './config/passport';
@@ -67,6 +68,7 @@ app.use('/api/likes', likeRoutes);
 app.use('/api/upload', uploadRoutes);
 app.use('/api/analytics', analyticsRoutes);
 app.use('/api/tags', tagRoutes);
+app.use('/api/admin', adminRoutes);
 
 // 404 handler
 app.use((req, res) => {

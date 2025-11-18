@@ -75,18 +75,18 @@ export default function AdminAuditLogPage() {
 
   const getActionBadgeColor = (action: string) => {
     if (action.includes('DELETE') || action.includes('BANNED')) {
-      return 'bg-red-100 text-red-700';
+      return 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400';
     }
     if (action.includes('SUSPENDED')) {
-      return 'bg-yellow-100 text-yellow-700';
+      return 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400';
     }
     if (action.includes('REINSTATED') || action.includes('RESOLVED')) {
-      return 'bg-green-100 text-green-700';
+      return 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400';
     }
     if (action.includes('UPDATED') || action.includes('ROLE')) {
-      return 'bg-blue-100 text-blue-700';
+      return 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400';
     }
-    return 'bg-gray-100 text-gray-700';
+    return 'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300';
   };
 
   const formatActionName = (action: string) => {
@@ -97,12 +97,12 @@ export default function AdminAuditLogPage() {
     if (!details) return null;
 
     if (typeof details === 'string') {
-      return <p className="text-sm text-gray-600">{details}</p>;
+      return <p className="text-sm text-gray-600 dark:text-gray-400">{details}</p>;
     }
 
     return (
-      <div className="text-sm text-gray-600">
-        <pre className="bg-gray-50 p-2 rounded overflow-x-auto">
+      <div className="text-sm text-gray-600 dark:text-gray-400">
+        <pre className="bg-gray-50 dark:bg-gray-700 p-2 rounded overflow-x-auto dark:text-gray-300">
           {JSON.stringify(details, null, 2)}
         </pre>
       </div>
@@ -111,30 +111,30 @@ export default function AdminAuditLogPage() {
 
   if (isLoading || loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center dark:bg-gray-900">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Loading audit logs...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 dark:border-primary-500 mx-auto"></div>
+          <p className="mt-4 text-gray-600 dark:text-gray-400">Loading audit logs...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       {/* Header */}
-      <div className="bg-white border-b border-gray-200">
+      <div className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-2xl font-bold text-gray-900">Audit Log</h1>
-              <p className="text-sm text-gray-600 mt-1">
+              <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Audit Log</h1>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
                 Track all administrative actions performed on the platform
               </p>
             </div>
             <Link
               href="/admin"
-              className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50"
+              className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 dark:text-gray-300"
             >
               Back to Dashboard
             </Link>
@@ -144,12 +144,12 @@ export default function AdminAuditLogPage() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Filters */}
-        <div className="bg-white rounded-lg border border-gray-200 p-6 mb-6">
-          <h2 className="text-lg font-semibold mb-4">Filters</h2>
+        <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6 mb-6">
+          <h2 className="text-lg font-semibold mb-4 dark:text-gray-100">Filters</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Action Filter */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Action Type
               </label>
               <select
@@ -158,7 +158,7 @@ export default function AdminAuditLogPage() {
                   setActionFilter(e.target.value);
                   setPagination({ ...pagination, page: 1 });
                 }}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-gray-100"
               >
                 <option value="">All Actions</option>
                 <optgroup label="User Actions">
@@ -191,7 +191,7 @@ export default function AdminAuditLogPage() {
 
             {/* Admin Filter (optional - could be enhanced) */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Admin ID (Optional)
               </label>
               <input
@@ -202,24 +202,24 @@ export default function AdminAuditLogPage() {
                   setPagination({ ...pagination, page: 1 });
                 }}
                 placeholder="Filter by admin user ID"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-gray-100 dark:placeholder-gray-400"
               />
             </div>
           </div>
         </div>
 
         {/* Audit Logs */}
-        <div className="bg-white rounded-lg border border-gray-200">
+        <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
           {logs.length === 0 ? (
             <div className="text-center py-12">
-              <p className="text-gray-500">No audit logs found</p>
+              <p className="text-gray-500 dark:text-gray-400">No audit logs found</p>
             </div>
           ) : (
             <>
               {/* Logs List */}
-              <div className="divide-y divide-gray-200">
+              <div className="divide-y divide-gray-200 dark:divide-gray-700">
                 {logs.map((log) => (
-                  <div key={log.id} className="p-6 hover:bg-gray-50">
+                  <div key={log.id} className="p-6 hover:bg-gray-50 dark:hover:bg-gray-700/50">
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
                         {/* Action and Badge */}
@@ -232,13 +232,13 @@ export default function AdminAuditLogPage() {
                             {formatActionName(log.action)}
                           </span>
                           {log.performedBy && (
-                            <span className="text-sm text-gray-600">
-                              by <span className="font-medium">{log.performedBy.fullName}</span>
+                            <span className="text-sm text-gray-600 dark:text-gray-400">
+                              by <span className="font-medium dark:text-gray-300">{log.performedBy.fullName}</span>
                               <span
                                 className={`ml-2 px-2 py-0.5 rounded text-xs ${
                                   log.performedBy.role === 'SUPER_ADMIN'
-                                    ? 'bg-purple-100 text-purple-700'
-                                    : 'bg-blue-100 text-blue-700'
+                                    ? 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400'
+                                    : 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400'
                                 }`}
                               >
                                 {log.performedBy.role}
@@ -249,7 +249,7 @@ export default function AdminAuditLogPage() {
 
                         {/* Target Info */}
                         {log.targetType && log.targetId && (
-                          <div className="text-sm text-gray-600 mb-2">
+                          <div className="text-sm text-gray-600 dark:text-gray-400 mb-2">
                             Target: {log.targetType} ({log.targetId})
                           </div>
                         )}
@@ -262,7 +262,7 @@ export default function AdminAuditLogPage() {
                         )}
 
                         {/* Metadata */}
-                        <div className="flex items-center gap-4 mt-3 text-xs text-gray-500">
+                        <div className="flex items-center gap-4 mt-3 text-xs text-gray-500 dark:text-gray-400">
                           <span>
                             {new Date(log.createdAt).toLocaleString()}
                           </span>
@@ -281,9 +281,9 @@ export default function AdminAuditLogPage() {
 
               {/* Pagination */}
               {pagination.pages > 1 && (
-                <div className="border-t border-gray-200 px-6 py-4">
+                <div className="border-t border-gray-200 dark:border-gray-700 px-6 py-4">
                   <div className="flex items-center justify-between">
-                    <div className="text-sm text-gray-600">
+                    <div className="text-sm text-gray-600 dark:text-gray-400">
                       Page {pagination.page} of {pagination.pages} (Total: {pagination.total} logs)
                     </div>
                     <div className="flex gap-2">
@@ -292,7 +292,7 @@ export default function AdminAuditLogPage() {
                           setPagination({ ...pagination, page: pagination.page - 1 })
                         }
                         disabled={pagination.page === 1}
-                        className="px-4 py-2 border border-gray-300 rounded hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded hover:bg-gray-50 dark:hover:bg-gray-700 dark:text-gray-300 disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         Previous
                       </button>
@@ -301,7 +301,7 @@ export default function AdminAuditLogPage() {
                           setPagination({ ...pagination, page: pagination.page + 1 })
                         }
                         disabled={pagination.page === pagination.pages}
-                        className="px-4 py-2 border border-gray-300 rounded hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded hover:bg-gray-50 dark:hover:bg-gray-700 dark:text-gray-300 disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         Next
                       </button>
@@ -314,11 +314,11 @@ export default function AdminAuditLogPage() {
         </div>
 
         {/* Info Box */}
-        <div className="mt-6 bg-blue-50 border border-blue-200 rounded-lg p-4">
+        <div className="mt-6 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
           <div className="flex">
             <div className="flex-shrink-0">
               <svg
-                className="h-5 w-5 text-blue-400"
+                className="h-5 w-5 text-blue-400 dark:text-blue-500"
                 fill="currentColor"
                 viewBox="0 0 20 20"
               >
@@ -330,8 +330,8 @@ export default function AdminAuditLogPage() {
               </svg>
             </div>
             <div className="ml-3">
-              <h3 className="text-sm font-medium text-blue-800">About Audit Logs</h3>
-              <div className="mt-2 text-sm text-blue-700">
+              <h3 className="text-sm font-medium text-blue-800 dark:text-blue-400">About Audit Logs</h3>
+              <div className="mt-2 text-sm text-blue-700 dark:text-blue-300">
                 <p>
                   Every administrative action is automatically logged here for accountability and
                   security. Logs include the admin who performed the action, what was changed, when
